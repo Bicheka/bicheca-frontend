@@ -1,0 +1,41 @@
+.loginButton{
+    background-color: #00a2e3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px;
+    padding: 10px;
+    margin: 20px 0;
+}
+
+
+
+.register {
+    
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 8em;
+} 
+
+.fields{
+    display: grid;
+    grid-template-columns: repeat(3, 100fr);
+    grid-gap: 5em;
+    margin-bottom: 3em;
+}
+
+.fields label{
+    display: flex;
+}
+
+.fields input{
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(222, 222, 222);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+  

@@ -1,38 +1,57 @@
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
-  }
-  
-  label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  input {
-    padding: 5px;
-    margin: 5px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    width: 300px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px;
-    margin: 20px 0;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 150px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #3e8e41;
-  }
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+label {
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.field{
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.field input{
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 20em;
+  border-radius: 8px;
+  border: 1px solid rgb(222, 222, 222);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+button[type="submit"] {
+  padding: 10px;
+  margin: 20px 0;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+}
+
+button[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+.registerButton{
+  background-color: #00a2e3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  padding: 10px;
+  margin: 20px 0;
+}

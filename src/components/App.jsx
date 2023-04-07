@@ -1,27 +1,29 @@
 import React from "react";
 // import Register from "./Register";
 import '../css/App.css';
-import Login from "./Login";
+// import GetStores from "./GetStores";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import NavBar from "./NavBar";
+import { BrowserRouter } from "react-router-dom";
+
 
 function App(){
 
-  // const [joke, setJoke] = React.useState("");
+  // const [islogged , setIsLogged] = React.useState(false);
 
-  
-
-  // const getJoke = () => {
-  //   Axios.get("https://official-joke-api.appspot.com/random_joke")
-  //   .then((response) => {
-  //     setJoke(response.data.setup + "..." + response.data.punchline);
-  //   })
-  //   .catch((error) => {
-  //     console.log(error);
-  //   })
+  // const handleLogin = () => {
+  //   setIsLogged(true);
   // }
+
   return(
     <div className="App">
       {/* <Register /> */}
-      <Login />
+      <Provider store={store}>
+        
+        <NavBar />
+        
+      </Provider>
     </div>
   )
 }
