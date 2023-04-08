@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 import '../css/Register.css';
 
 function Register() {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
+    confirmPassword: '',
     role: 'USER',
     address: {
       streetAddress: '',
@@ -22,49 +27,70 @@ function Register() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    if(value === undefined || value === null){
+      setFormData({...formData});
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   const handleAddressChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      address: {
-        ...formData.address,
-        [name]: value
-      }
-    });
+    if (value === undefined || value === null) {
+      setFormData({ ...formData, address: { ...formData.address } });
+    }
+    else{
+      setFormData({
+        ...formData,
+        address: {
+          ...formData.address,
+          [name]: value
+        }
+      });
+    }
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    if (formData.password !== formData.confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      return;
+      if (formData.password !== formData.confirmPassword) {
+        setErrorMessage('Passwords do not match');
+        return;
+      }
+
+      axios.post('http://localhost:8080/user/register', formData)
+        .then(() => { //then set all the input fields to empty again
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            role: 'USER',
+            address: {
+              streetAddress: '',
+              apt: '',
+              city: '',
+              country: '',
+              zipCode: '',
+              state: ''
+            }
+          });
+          setErrorMessage('');
+          alert('Registration successful! go to your email to verify your account');
+        })
+        .catch(error => setErrorMessage(error.response.data.message));
+
+      navigate('/login');
+
+    } catch (error) {
+        setErrorMessage(error.response.data.message);
     }
 
-    axios.post('http://localhost:8080/user/register', formData)
-      .then(() => {
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          password: '',
-          role: 'USER',
-          address: {
-            streetAddress: '',
-            apt: '',
-            city: '',
-            country: '',
-            zipCode: '',
-            state: ''
-          }
-        });
-        setErrorMessage('');
-        alert('Registration successful!');
-      })
-      .catch(error => setErrorMessage(error.response.data.message));
   };
 
   return (
