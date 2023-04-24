@@ -6,7 +6,7 @@ const initialState = {
 
 
 const loginSlice = createSlice({
-    name: 'userInfo',
+    name: 'login',
     initialState,
     reducers: {
         setIsLogged: (state, action) => {

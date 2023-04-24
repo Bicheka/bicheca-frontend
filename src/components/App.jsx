@@ -5,6 +5,7 @@ import '../css/App.css';
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import NavBar from "./NavBar";
+import "../css/App.css"
 
 function App(){
 
@@ -13,6 +14,8 @@ function App(){
   // const handleLogin = () => {
   //   setIsLogged(true);
   // }
+
+  
 
   return(
     <div className="App">

@@ -1,15 +1,24 @@
 .navBar{
+    background-color: rgb(228, 240, 255);
     display: flex;
-    margin-left: 10%;
-    background-color: white;
+    margin-left: 30%;
+
     padding-bottom:  10px;
     justify-content: space-evenly;
     position: fixed;
     bottom: 0;
-    width: 80%;
+    width: 40%;
     z-index: 1;
-    
+    border-radius: 10px;
 }
+
+@media screen and (max-width: 992px) {
+    .navBar{
+        margin-left: 0;
+        width: 100%;
+    }
+
+  }
 
 .navBarButton{
     text-decoration: none;

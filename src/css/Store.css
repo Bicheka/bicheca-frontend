@@ -1,0 +1,13 @@
+.store{
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    color: rgb(23, 23, 28);
+    background-color: #e6e6e6;
+    text-align: center;
+    border-radius: 10px;
+    display: block;
+
+    align-items: center;
+    display: relative;
+}

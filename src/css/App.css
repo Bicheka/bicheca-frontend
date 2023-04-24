@@ -1,37 +1,18 @@
+
 body{
   background-color: white;
   align-items: center;
   text-align: center;
-}
-button{
-  border: none;
-  color: gray;
-  background-color: transparent;
   margin: 0;
 }
+
+
 p{
   /* font-size: 16px; */
   font-weight: 600;
   margin: auto;
-  text-decoration: none;
-}
-.home{
-  width: 80%;
-  margin: 0 auto;
+  
 }
 
-.expand:hover{
-  color: gold;
-}
 
-@media only screen and (max-width: 600px) {
-  .id p{
-    /* font-size: 16px; */
-    padding: 5px;
-    margin: 0;
-  }
-  .home{
-    width: 95%;
-    margin: 0 auto;
-  }
-}
+

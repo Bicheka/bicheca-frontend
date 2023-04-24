@@ -5,6 +5,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { setJwt } from './redux/slices/jwtSlices';
 import { setUserInfo } from './redux/slices/userInfoSlice';
 import { useNavigate } from 'react-router';
+import { setIsLogged } from './redux/slices/loginSlices';
 
 function Login(props) {
   const [email, setemail] = useState('');
@@ -50,7 +51,7 @@ function Login(props) {
       });
 
       // setUserName(user.data.firstName);
-      // setIsLogged(true);
+      dispatch(setIsLogged(true));
       props.setIsLogged(true);
       dispatch(setUserInfo(user.data));
       
@@ -64,12 +65,11 @@ function Login(props) {
   
   };
 
-  
-
   //<h1>{isLogged ? "Hello "+userName : ""}</h1>  //conditional rendering
 
   return (
     <div className="login">
+      <h1>Login</h1>
       {/* <h1>{isLogged ? "Hello "+userName : ""}</h1> */}
       <form onSubmit={handleLogin}>
         {error && <div>{error}</div>}

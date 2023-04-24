@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link , Routes, Route} from "react-router-dom";
 
 //css
@@ -6,36 +6,46 @@ import '../css/NavBar.css';
 
 //components
 // import Account from './Account';
-import Home from './Home';
-import Stores from './Stores';
+import Mall from './Mall';
 import Products from './Products';
 import Account from './Account';
 import Cart from './Cart';
 import Login from './Login';
 import Register from './Register';
+import MyBusines from './MyBusines';
+import ProductDetails from './ProductDetails';
 
 //icons
-import HomeIcon from '@mui/icons-material/Home';
+import MallIcon from '@mui/icons-material/StoreMallDirectory';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import StoreIcon from '@mui/icons-material/StoreMallDirectory';
 import ProductIcon from '@mui/icons-material/Category';
 import LoginIcon from '@mui/icons-material/Login';
-
+import { useSelector } from 'react-redux';
+import WorkIcon from '@mui/icons-material/Work';
 // import { useSelector } from 'react-redux';
-
 
 
 function NavBar(){
 
+    const userInfo = useSelector(state => state.userInfo.userInfo);
+
     //active button
     const [activeButton, setActiveButton] = useState('');
     const [islogged , setIsLogged] = useState(false);
+    const[isStore , setIsStore] = useState(false);
 
     const handleActiveButton = (button) => {
         setActiveButton(button);
     }
 
+    useEffect(() => {
+        if(userInfo){
+            if(userInfo.role === 'STORE'){
+                setIsStore(true);
+            }
+        }
+    }, [userInfo]);
 
     return (
         <BrowserRouter forceRefresh = {true}>
@@ -44,23 +54,11 @@ function NavBar(){
                     
                         <Link 
                             to = "/"
-                            className={`navBarButton ${activeButton === 'home' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('home')}
+                            className={`navBarButton ${activeButton === 'mall' ? 'active' : ''}`}
+                            onClick = {() => handleActiveButton('mall')}
                         >
-                            <HomeIcon/>
-                            <p>Home</p>
-                        </Link>
-                    
-                </div>
-                <div className="navBarItem">
-                    
-                        <Link 
-                            to = "/stores" 
-                            className={`navBarButton ${activeButton === 'stores' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('stores')}
-                        >
-                            <StoreIcon className = "storeIcon" />
-                            <p>stores</p>
+                            <MallIcon className = "mallIcon" />
+                            <p>Mall</p>
                         </Link>
                     
                 </div>
@@ -114,16 +112,33 @@ function NavBar(){
                         }
                 
                 </div>
+            
+                    <div className="navBarItem">
+                    
+                        {isStore &&
+                            <Link 
+                                to = "/mybusines"
+                                className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
+                                onClick = {() => handleActiveButton('mybusines')}
+                            >
+                                <WorkIcon className = "mybusinesIcon" />
+                                <p>Mall</p>
+                            </Link>
+                        }
+                    </div>
+            
                 
             </div>
             <Routes>
-                <Route exact path='/' element = {<Home/>}/>
-                <Route exact path='/stores' element={<Stores/>}/>
+                <Route exact path='/' element = {<Mall/>}/>
                 <Route exact path='/products' element={<Products/>}/>
                 <Route exact path='/cart' element={<Cart/>}/>
                 <Route exact path='/account' element={<Account/>}/>
                 <Route exact path='/login' element={<Login setIsLogged = {setIsLogged} />}/>
                 <Route exact path='/register' element={<Register/>}/>
+                <Route exact path='/mybusines' element={<MyBusines/>}/>
+                <Route exact path='/product-details/:productId' element={<ProductDetails/>}/>
+
             </Routes>
         </BrowserRouter>
         

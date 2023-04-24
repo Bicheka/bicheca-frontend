@@ -95,7 +95,7 @@ function Register() {
 
   return (
     <div className='register'>
-      <h2>Register</h2>
+      <h1>Register</h1>
       {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
       <form className ="registerFrom" onSubmit={handleSubmit}>
         <div className='fields'>

@@ -1,10 +1,15 @@
 import React from "react";
+import "../css/Store.css";
 
-function Store() {
+function Store(props) {
+
+    function handleClick() {
+        props.onClick(props.id, props.name);
+    }
     
     return (
-        <div className="stores">
-            <h1>Store</h1>
+        <div onClick={handleClick} className="store">
+            <h3 className="storeName">{props.name}</h3>
         </div>
     );
 }
