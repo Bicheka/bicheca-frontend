@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation } from "react-router";
 import GoBackButton from "./GoBackButton";
+import Comments from "./Comments";
 
 function ProductDetails() {
 
@@ -37,6 +38,8 @@ function ProductDetails() {
             <p>{product.category}</p>
             <GoBackButton/>
             
+            <Comments id={id}/>
+
         </div>
     );
 }
