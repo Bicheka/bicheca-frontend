@@ -1,0 +1,32 @@
+.comment {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 20%;
+    margin: 50px auto;
+    border-radius: 30px;
+}
+
+@media screen and (max-width: 1100px) {
+    .comment{
+        max-width: 70%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .comment{
+        max-width: 80%;
+    }
+}
+    
+
+.comment p {
+margin: 5px 0;
+}
+
+.comment p:first-child {
+font-weight: bold;
+}
+
+  
