@@ -19,6 +19,7 @@ function Account(){
     const [storeName, setStoreName] = useState('');
     const [logged , setLogged] = useState(false);
     const [token, setToken] = useState('');
+    const [storeNameExists, setStoreNameExists] = useState(false);
     
     useEffect(() => {
         if(userInfo){
@@ -43,15 +44,27 @@ function Account(){
         const data = { storeName };
         const headers = { Authorization: `Bearer ${token}` };
         try {
-            const response = await axios.post('http://localhost:8080/store/create_store', data, { headers });
-            console.log(response.data);
+            await axios.post('http://localhost:8080/store/create_store', data, { headers })
+            .then(response => {
+                if(response.status === 200){
+                    setStoreNameExists(false);
+                }
+                else if(response.status === 409){
+                    setStoreNameExists(true);
+                }
+                else{
+                    throw new Error('Something went wrong');
+                }
+            })
             setIsCreatingStore(false);
             if(userInfo.role !== "STORE"){
                 const updatedUserInfo = { ...userInfo, role: "STORE" };
                 dispatch(setUserInfo(updatedUserInfo));
-            }
+            }    
+
         } catch (error) {
             console.error(error);
+            throw error;
         }
     }
 
@@ -67,6 +80,7 @@ function Account(){
                     {!isCreatingStore && <button className='createStoreButton' onClick={changeCreatingStore}>Create Store</button>}
                     {isCreatingStore && (
                         <form className='createStoreForm' onSubmit={handleCreateStore}>
+                            {storeNameExists && <p>Store Name already exists</p>}
                             <input type='text' placeholder='Store Name' value={storeName} onChange={(e) => setStoreName(e.target.value)} />
                             <button type='submit'>Submit</button>
                             <button type='button' onClick={changeCreatingStore}>Cancel</button>
@@ -79,5 +93,4 @@ function Account(){
         </div>
     );
 }
-
 export default Account;

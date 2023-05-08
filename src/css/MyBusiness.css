@@ -1,4 +1,4 @@
-.mall{
+.userStores{
     max-width: 50%;
     margin: 100px auto;
     display: grid;
@@ -10,15 +10,3 @@
     grid-gap: 50px;
     grid-auto-flow: row;
 }
-
-@media screen and (max-width: 600px){
-    .mall{
-        max-width: 100%;
-
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(150px, 1fr));
-        grid-auto-rows: 150px;
-        grid-gap: 50px;
-    }
-}
-    

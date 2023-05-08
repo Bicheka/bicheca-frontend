@@ -13,17 +13,17 @@ function ProductDetails() {
     
 
     useEffect(() => {
-            const fetchProduct = async () => {
-                try{
-                    const response = await axios.get(`http://localhost:8080/product/get_product_by_id/${id}`);
-                    setProduct(response.data);
-                    console.log(response);
-                } catch (error) {
-                    console.log(error);
-                }
+        const fetchProduct = async () => {
+            try{
+                const response = await axios.get(`http://localhost:8080/product/get_product_by_id/${id}`);
+                setProduct(response.data);
+                console.log(response);
+            } catch (error) {
+                console.log(error);
             }
-            
-            fetchProduct();
+        }
+        
+        fetchProduct();
         
 
     }, [id]);

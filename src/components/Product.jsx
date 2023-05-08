@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "../css/Product.css"; 
+import "../css/Product.css";
+
+//icons
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 import { useSelector } from "react-redux";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Product(props) {
 
@@ -13,20 +17,29 @@ function Product(props) {
     const [token, setToken] = useState('');
     const [logged , setLogged] = useState(false);
     const jwt = useSelector(state => state.jwt.jwt);
+    const userInfo = useSelector(state => state.userInfo.userInfo);
+    const location = useLocation();
+
+    const [role, setRole] = useState('');
+    const currentLocation = location.pathname.split("/")[1];
 
     useEffect(() => {
+        if(userInfo){
+            setRole(userInfo.role);
+        }
         if(jwt){
             setToken(jwt);
         }
         if(isLogged){
             setLogged(true);
         }
-    }, [isLogged, jwt]);
+        
+    }, [userInfo, isLogged, jwt]);
 
     async function addToCart(){
         if(logged){
             try{
-                await axios.patch(
+                await axios.delete(
                     `http://localhost:8080/cart/add-product-to-cart/${props.id}`,
                     {},//request body
                     {
@@ -44,7 +57,22 @@ function Product(props) {
         }
     }
 
-    
+    const handleDelete = async () => {
+        try{
+            await axios.delete(
+                `http://localhost:8080/product/delete_product/${props.id}`,
+                {
+                    headers: {
+                        Authorization: token,
+                    },
+                }
+            );
+            props.onDelete(props.id);
+        }catch(error){
+            console.log(error);
+        }
+        
+    }
 
     return (
             <div className="product">
@@ -61,7 +89,15 @@ function Product(props) {
                         <p className="productName">{props.name}</p>
                         <p className="productPrice">${props.price}</p>   
                     </div>
-                    <button onClick={addToCart} className="addToCartButton"><AddShoppingCartIcon/></button>
+                    {currentLocation === "admin-store" && role === "STORE" ? 
+                        (
+                            <button onClick={handleDelete} className="deleteProductButton"><DeleteIcon/></button>
+                        )
+                        : 
+                        (
+                            <button onClick={addToCart} className="addToCartButton"><AddShoppingCartIcon/></button>
+                        )
+                    }
                 </div>
             </div>
        

@@ -14,6 +14,9 @@ import Login from './Login';
 import Register from './Register';
 import MyBusines from './MyBusines';
 import ProductDetails from './ProductDetails';
+import StoreDetails from './StoreDetails';
+import AdminStore from './AdminStore';
+import CreateProductForm from './CreateProductForm';
 
 //icons
 import MallIcon from '@mui/icons-material/StoreMallDirectory';
@@ -23,6 +26,7 @@ import ProductIcon from '@mui/icons-material/Category';
 import LoginIcon from '@mui/icons-material/Login';
 import { useSelector } from 'react-redux';
 import WorkIcon from '@mui/icons-material/Work';
+
 // import { useSelector } from 'react-redux';
 
 
@@ -122,7 +126,7 @@ function NavBar(){
                                 onClick = {() => handleActiveButton('mybusines')}
                             >
                                 <WorkIcon className = "mybusinesIcon" />
-                                <p>Mall</p>
+                                <p>My Business</p>
                             </Link>
                         }
                     </div>
@@ -138,7 +142,9 @@ function NavBar(){
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/mybusines' element={<MyBusines/>}/>
                 <Route exact path='/product-details/:productId' element={<ProductDetails/>}/>
-
+                <Route exact path='/store-details/:storeId' element={<StoreDetails/>}/>
+                <Route exact path='/admin-store/:storeId' element={<AdminStore/>}/>
+                <Route exact path='/create-product/:storeId' element={<CreateProductForm/>}/>
             </Routes>
         </BrowserRouter>
         

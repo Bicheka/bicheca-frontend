@@ -32,6 +32,19 @@
     
 }
 
+.deleteProductButton{
+    bottom: 0;
+    right: 0;
+    background-color: white;
+    color: rgb(255, 0, 0);
+    border-radius: 5px;
+    border: none;
+}
+.deleteProductButton:hover{
+    background-color: rgb(255, 0, 0);
+    color: white;
+    cursor: pointer;
+}
 .addToCartButton{
     bottom: 0;
     right: 0;

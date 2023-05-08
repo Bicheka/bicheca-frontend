@@ -59,8 +59,10 @@ function Login(props) {
       
       navigate('/'); //redirect to home page after login
 
-    } catch (error) {
-      setError('Invalid email or password');
+    } catch (erroR) {
+      setError(erroR);
+      console.log(erroR);
+      console.log(erroR.response.data.message);
     }
   
   };
@@ -75,7 +77,7 @@ function Login(props) {
         {error && <div>{error}</div>}
         <div className='field'>
           <label>Email</label>
-          <input type="text" value={email} onChange={e => setemail(e.target.value)} />
+          <input type="email" name="email" value={email} onChange={e => setemail(e.target.value)} />
         </div>
         <div className='field'>
           <label>Password</label>

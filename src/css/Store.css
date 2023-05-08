@@ -11,3 +11,22 @@
     align-items: center;
     display: relative;
 }
+
+.storeName{
+    font-size: 1.4em;
+    font-weight: 600;
+    margin: 0 auto;
+    padding-top: 10px;
+}
+
+@media screen and (max-width: 600px){
+    .store{
+        width: 100px;
+        height: 100px;
+    }
+    .storeName{
+        font-size: 0.9em;
+        font-weight: 700;
+    }
+}
+    
