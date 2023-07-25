@@ -39,7 +39,7 @@ function Product(props) {
     async function addToCart(){
         if(logged){
             try{
-                await axios.delete(
+                await axios.patch(
                     `http://localhost:8080/cart/add-product-to-cart/${props.id}`,
                     {},//request body
                     {
@@ -58,6 +58,7 @@ function Product(props) {
     }
 
     const handleDelete = async () => {
+        console.log(props.id);
         try{
             await axios.delete(
                 `http://localhost:8080/product/delete_product/${props.id}`,
