@@ -28,7 +28,7 @@ function AdminStore() {
         }
         
         fetchProducts();
-        
+
     }, [storeId]);
 
 
@@ -44,7 +44,16 @@ function AdminStore() {
             <h1>{"Admin " + storeName + " products"}</h1>
             <div className="mall">
                 {products.map(product => (
-                    <Product key={product.id} id={product.id} name={product.name} price={product.price} description={product.description} onDelete={handleDeleteProduct}/>
+                    <Product 
+                        key={product.id} 
+                        id={product.id} 
+                        name={product.name} 
+                        price={product.price} 
+                        description={product.description}
+                        imageIds = {product.imageIds}
+                        onDelete={handleDeleteProduct} 
+                        
+                    />
                 ))}
             </div>
             <button className="btn btn-primary" onClick={handleAddProductButton}>Add Product</button>

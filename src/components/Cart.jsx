@@ -79,7 +79,16 @@ function Cart() {
                 ? <h2 className="empty">Your cart is empty</h2>
                 : <div className="cartItems">
                     {cart.map(item => (
-                        <CartItem key={item.product.id} id={item.product.id} name={item.product.name} price={item.product.price} quantity={item.quantity} onRemove={removeFromCart} onUpdateQuantity={updateQuantity}/>
+                        <CartItem 
+                            key={item.product.id} 
+                            id={item.product.id} 
+                            name={item.product.name} 
+                            price={item.product.price} 
+                            quantity={item.quantity} 
+                            onRemove={removeFromCart} 
+                            onUpdateQuantity={updateQuantity} 
+                            imageIds = {item.product.imageIds}  
+                        />
                     ))}
                 </div>
             }

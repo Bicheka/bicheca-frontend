@@ -12,7 +12,6 @@ function Products() {
             try{
                 const response = await axios.get('http://localhost:8080/product/get_all_products');
                 setProductList(response.data);
-                console.log(response);
             } catch (error) {
                 console.log(error);
             }
@@ -27,7 +26,14 @@ function Products() {
             <h1>Products</h1>
             <div className="products">
                 {productList.map(product => (
-                    <Product key={product.id} id={product.id} name={product.name} price={product.price} description={product.description} />
+                    <Product 
+                        key={product.id} 
+                        id={product.id} 
+                        name={product.name} 
+                        price={product.price} 
+                        description={product.description} 
+                        imageIds = {product.imageIds}
+                    />
                 ))}
             </div>
         </div>

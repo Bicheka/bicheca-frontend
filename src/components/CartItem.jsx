@@ -11,11 +11,24 @@ function CartItem(props) {
 
     const [token, setToken] = useState('');
     const [quantity, setQuantity] = useState(props.quantity);
-
+    const [itemImage, setItemImage] = useState('');
 
     useEffect(() => {
+
+        const fetchProductImage = async () => {
+            try{
+                
+                const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image/${props.imageIds[0]}`);
+                setItemImage(response.data);
+                console.log(response);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchProductImage();
+
         setToken(jwt);
-    }, [jwt]);
+    }, [jwt, props.id, props.imageIds]);
 
     async function removeFromCart() {
         
@@ -73,9 +86,13 @@ function CartItem(props) {
     return (
         <div className="cartItem">
             <Link to={`/product-details/${props.id}`}>
-                <div className="cartItemImg">
-                    <img src="" alt="ProductImg"/>
-                </div>
+            <div className="productImg">
+                        <img
+                            className="product-img"
+                            src={`data:image/jpeg;base64,${itemImage}`}
+                            alt="itemImg"
+                        />                       
+                    </div>
             </Link>
             <div className="cartItemInfo">
                 <div className="productFooter">

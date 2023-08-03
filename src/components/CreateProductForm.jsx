@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate} from "react-router";
+import { useLocation} from "react-router";
 
 function CreateProductForm() {
 
     const location = useLocation();
-    const navigate = useNavigate();
+    
     const jwt = useSelector(state => state.jwt.jwt);
+    // const navigate = useNavigate();
 
     const [token, setToken] = React.useState('');
 
@@ -19,6 +20,7 @@ function CreateProductForm() {
     const [price, setPrice] = React.useState('');
     const [description, setDescription] = React.useState('');
     const [category, setCategory] = React.useState('');
+    const [selectedFile, setSelectedFile] = React.useState(null);
 
     useEffect(() => {
         setToken(jwt);
@@ -38,15 +40,13 @@ function CreateProductForm() {
             alert("Please fill all the fields");
             return;
         }
-
         
-
         const product = {
             name: name,
             price: price,
             description: description,
             category: category,
-            storeId: storeId
+            storeId: storeId,
         }
 
         console.log(product);
@@ -56,14 +56,47 @@ function CreateProductForm() {
 
         try {
             const response = await axios.post("http://localhost:8080/product/create_product", data, { headers });
-            console.log(response);
-
-            navigate(-1);
+            uploadImage(response.data.id);
+            
         } catch (error) {
             console.log(error);
         }
 
+        //TODO: GET REDIRECTED WITHOUT GETTING LOGGED OUT
+        window.location.href = `/admin-store/${storeId}`; //redirect to the admin-store page while updating the page where we are redirected
+    }
 
+
+    const uploadImage = async (productId) => {
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        try {
+
+            const imageResponse = await axios.post(
+                `http://localhost:8080/image/${productId}/upload_product_image`,
+                formData,//request body
+                {
+                    
+                    headers: {
+                        'Content-Type': 'multipart/form-data', // for images 'multipart/form-data
+                        Authorization: token,
+                    },
+
+                }
+            );
+            console.log(imageResponse);
+        } catch (error) {
+            
+            console.log(error);
+
+        }
+
+    }
+
+    const handleImageChange = (e) => {
+        setSelectedFile(e.target.files[0]);
     }
 
     return (
@@ -92,11 +125,10 @@ function CreateProductForm() {
                     <option value="OTHER">OTHER</option>
                 </select>
 
-                {/* <label>Product Image</label>
-                <input type="file" className="form-control" /> */}
+                <label>Product Image</label>
+                <input type="file" className="form-control" onChange={handleImageChange}/> 
 
                 <button className="btn btn-primary" onClick={handleCreateProduct}>Create Product</button>
-
 
             </form>
         </div>

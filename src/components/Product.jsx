@@ -19,11 +19,24 @@ function Product(props) {
     const jwt = useSelector(state => state.jwt.jwt);
     const userInfo = useSelector(state => state.userInfo.userInfo);
     const location = useLocation();
+    const [productImage, setProductImage] = useState('');
 
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
 
     useEffect(() => {
+
+        const fetchProductImage = async () => {
+            try{
+                
+                const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image/${props.imageIds[0]}`);
+                setProductImage(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchProductImage();
+
         if(userInfo){
             setRole(userInfo.role);
         }
@@ -34,7 +47,7 @@ function Product(props) {
             setLogged(true);
         }
         
-    }, [userInfo, isLogged, jwt]);
+    }, [userInfo, isLogged, jwt, props.id, props.imageIds]);
 
     async function addToCart(){
         if(logged){
@@ -58,7 +71,6 @@ function Product(props) {
     }
 
     const handleDelete = async () => {
-        console.log(props.id);
         try{
             await axios.delete(
                 `http://localhost:8080/product/delete_product/${props.id}`,
@@ -79,9 +91,11 @@ function Product(props) {
             <div className="product">
                 <Link to={`/product-details/${props.id}`}>
                     <div className="productImg">
-                            <div>
-                                <img src="" alt="ProductImg"/>
-                            </div>                        
+                        <img
+                            className="product-img"
+                            src={`data:image/jpeg;base64,${productImage}`}
+                            alt="product"
+                        />                       
                     </div>
                 </Link>
 
