@@ -1,32 +1,21 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import Store from "./Store";
 import '../css/MyBusiness.css';
+import {getUserStores} from '../service/client';
 
 function MyBusines() {
 
-  const jwt = useSelector(state => state.jwt.jwt);
+  // const jwt = useSelector(state => state.jwt.jwt);
+  const token = localStorage.getItem('token');
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    console.log("jwt", jwt);
+    console.log("token: ", token);
     const fetchUserStores = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/store/get_user_stores', 
-                    {
-                        headers: {
-                            Authorization: jwt,
-                        }
-                    });
-        console.log("response", response);
-        setStores(response.data);
-      } catch (error) {
-        console.log("error", error);
-      }
+      setStores(await getUserStores(token));
     };
     fetchUserStores();
-  }, [jwt]);
+  }, [token]);
 
   return (
     <div>

@@ -6,6 +6,7 @@ import { setJwt } from './redux/slices/jwtSlices';
 import { setUserInfo } from './redux/slices/userInfoSlice';
 import { useNavigate } from 'react-router';
 import { setIsLogged } from './redux/slices/loginSlices';
+import { fetchUser } from '../service/client';
 
 function Login(props) {
   const [email, setemail] = useState('');
@@ -35,6 +36,8 @@ function Login(props) {
       let token = response.headers.authorization;
       dispatch(setJwt(token));  //store the token in redux (globally)
 
+      localStorage.setItem('token', token); //store the token in local storage (globally)
+
       console.log("here should be the token -> " + token);
 
       if (rememberMe) {
@@ -44,15 +47,10 @@ function Login(props) {
         document.cookie = `token=${token};expires=${date.toUTCString()}`;
       } 
 
-      const user = await axios.get('http://localhost:8080/user', {
-        headers: {
-          Authorization: token
-        }
-      });
+      const user = await fetchUser(token);
 
       // setUserName(user.data.firstName);
       dispatch(setIsLogged(true));
-      props.setIsLogged(true);
       dispatch(setUserInfo(user.data));
       
       console.log(user.data);

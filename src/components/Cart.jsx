@@ -1,13 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 import '../css/Cart.css';
+import useCheckLogin from "./hook/useCheckLogin";
+
 
 function Cart() {
 
-    const isLogged = useSelector(state => state.login.isLogged);
-    const jwt = useSelector(state => state.jwt.jwt);
+    const {isLogged} = useCheckLogin();
+    const token = localStorage.getItem('token');
     const [total, setTotal] = useState("0");
     const [cart, setCart] = useState([]);
 
@@ -18,7 +19,7 @@ function Cart() {
                     const response = await axios.get('http://localhost:8080/cart/get-cart', 
                     {
                         headers: {
-                            Authorization: jwt,
+                            Authorization: token,
                         }
                     });
                     setCart(response.data);
@@ -37,7 +38,7 @@ function Cart() {
         
 
 
-    }, [isLogged, jwt]);
+    }, [isLogged, token]);
 
     function removeFromCart(id) {
         setCart(cart.filter((item) => item.product.id !== id));

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../css/Store.css";
+// import { useSelector } from "react-redux";
 import { useSelector } from "react-redux";
 
 function Store(props)
@@ -11,14 +12,15 @@ function Store(props)
     const [email, setEmail] = useState('');
     const [userRole, setUserRole] = useState('');
 
-    const userInfo = useSelector(state => state.userInfo.userInfo);
+    const user = useSelector(state => state.userInfo.userInfo);
 
     useEffect(() => {
-        if(userInfo){
-            setEmail(userInfo.email);
-            setUserRole(userInfo.role);
+        if(user){
+            setEmail(user.email);
+            setUserRole(user.role);
+            console.log("User role: "+user);
         }
-    }, [userInfo]);
+    }, [user]);
 
     return(
         <div>

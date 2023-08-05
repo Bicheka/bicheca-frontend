@@ -3,14 +3,20 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from './redux/slices/userInfoSlice';
+import { useNavigate } from 'react-router';
 
 function Account(){
 
     const dispatch = useDispatch();
 
-    const userInfo = useSelector(state => state.userInfo.userInfo);
+    const user = useSelector(state => state.userInfo.userInfo);
+
     const isLogged = useSelector(state => state.login.isLogged);
-    const jwt = useSelector(state => state.jwt.jwt);
+
+    const navigate = useNavigate();
+
+    const userInfo = useSelector(state => state.userInfo.userInfo);
+    // const isLogged = useSelector(state => state.login.isLogged)
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -22,18 +28,21 @@ function Account(){
     const [storeNameExists, setStoreNameExists] = useState(false);
     
     useEffect(() => {
-        if(userInfo){
-            setFirstName(userInfo.firstName);
-            setLastName(userInfo.lastName);
-            setEmail(userInfo.email);
+
+        console.log("Account useEffect, isLogged: ", isLogged);
+
+        if(user){
+            setFirstName(user.firstName);
+            setLastName(user.lastName);
+            setEmail(user.email);
         }
         if(isLogged){
             setLogged(true);
         }
-        if(jwt){
-            setToken(jwt);
+        if(localStorage.getItem('token')){
+            setToken(localStorage.getItem('token'));
         }
-    }, [userInfo, isLogged, jwt]);
+    }, [isLogged, user]);
 
     const changeCreatingStore = () => {
         setIsCreatingStore(!isCreatingStore);
@@ -68,6 +77,13 @@ function Account(){
         }
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        // setLogged(false);
+        navigate('/login')
+        window.location.reload();
+    }
+
     //if is logged show account info if not display not logged in
     return (
         <div>
@@ -86,6 +102,7 @@ function Account(){
                             <button type='button' onClick={changeCreatingStore}>Cancel</button>
                         </form>
                     )}
+                    <button className='logoutButton' onClick={handleLogout}>Logout</button>
                 </div>
             ) : (
                 <h3>Not Logged</h3>

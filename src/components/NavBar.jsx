@@ -24,32 +24,46 @@ import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ProductIcon from '@mui/icons-material/Category';
 import LoginIcon from '@mui/icons-material/Login';
-import { useSelector } from 'react-redux';
 import WorkIcon from '@mui/icons-material/Work';
 
-// import { useSelector } from 'react-redux';
-
-
+//hook
+import useCheckLogin from './hook/useCheckLogin';
+import { useSelector } from 'react-redux';
 function NavBar(){
-
-    const userInfo = useSelector(state => state.userInfo.userInfo);
 
     //active button
     const [activeButton, setActiveButton] = useState('');
-    const [islogged , setIsLogged] = useState(false);
-    const[isStore , setIsStore] = useState(false);
+    // const[isStore , setIsStore] = useState(false);
+
+    const location = window.location.pathname;
+
+    const {isLogged} = useCheckLogin();
+
+    const user = useSelector(state => state.userInfo.userInfo);
+
+    const [isStore, setIsStore] = useState(false);
 
     const handleActiveButton = (button) => {
         setActiveButton(button);
     }
 
     useEffect(() => {
-        if(userInfo){
-            if(userInfo.role === 'STORE'){
+
+        console.log("NavBar useEffect, user: ", user);
+        console.log("isStore::"+isStore);
+
+        handleActiveButton(location.split('/')[1]);//get the first part of the path
+        console.log("location: ", location.split('/')[1]);
+        if(user){
+            if(user.role === "STORE"){
                 setIsStore(true);
             }
+            else{
+                setIsStore(false);
+            }
         }
-    }, [userInfo]);
+        
+    }, [user, isStore, location]);
 
     return (
         <BrowserRouter forceRefresh = {true}>
@@ -58,8 +72,8 @@ function NavBar(){
                     
                         <Link 
                             to = "/"
-                            className={`navBarButton ${activeButton === 'mall' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('mall')}
+                            className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
+                            onClick = {() => handleActiveButton('')}
                         >
                             <MallIcon className = "mallIcon" />
                             <p>Mall</p>
@@ -92,7 +106,7 @@ function NavBar(){
                 </div>
                 <div className="navBarItem">
                     
-                        {islogged ?
+                        {isLogged ?
                 
                             <Link 
                             to = "/account" 
@@ -138,7 +152,7 @@ function NavBar(){
                 <Route exact path='/products' element={<Products/>}/>
                 <Route exact path='/cart' element={<Cart/>}/>
                 <Route exact path='/account' element={<Account/>}/>
-                <Route exact path='/login' element={<Login setIsLogged = {setIsLogged} />}/>
+                <Route exact path='/login' element={<Login/>}/>
                 <Route exact path='/register' element={<Register/>}/>
                 <Route exact path='/mybusines' element={<MyBusines/>}/>
                 <Route exact path='/product-details/:productId' element={<ProductDetails/>}/>
