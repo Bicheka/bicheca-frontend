@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import '../css/Cart.css';
-import useCheckLogin from "./hook/useCheckLogin";
+import { useSelector } from "react-redux";
 
 
 function Cart() {
 
-    const {isLogged} = useCheckLogin();
+    const isLogged = useSelector(state => state.login.isLogged);
     const token = localStorage.getItem('token');
     const [total, setTotal] = useState("0");
     const [cart, setCart] = useState([]);

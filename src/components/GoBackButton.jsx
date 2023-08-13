@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-
+import styles from '../css/goBackButton.module.scss';
 
 function GoBackButton() {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ function GoBackButton() {
   };
 
   return (
-    <button onClick={handleGoBack}>
+    <button className={`${styles.btn} btn`} onClick={handleGoBack}>
       Go Back
     </button>
   );

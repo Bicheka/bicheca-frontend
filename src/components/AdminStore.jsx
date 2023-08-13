@@ -42,6 +42,11 @@ function AdminStore() {
     return (
         <div>
             <h1>{"Admin " + storeName + " products"}</h1>
+
+            <button className="btn btn-primary" onClick={handleAddProductButton}>Add Product</button>
+            
+            <GoBackButton/>
+
             <div className="mall">
                 {products.map(product => (
                     <Product 
@@ -52,13 +57,10 @@ function AdminStore() {
                         description={product.description}
                         imageIds = {product.imageIds}
                         onDelete={handleDeleteProduct} 
-                        
+                        isOnAdminStore={true}
                     />
                 ))}
             </div>
-            <button className="btn btn-primary" onClick={handleAddProductButton}>Add Product</button>
-            
-            <GoBackButton/>
         </div>
     );
 }

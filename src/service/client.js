@@ -33,3 +33,74 @@ export const getUserStores = async (token) => {
         console.log("error", error);
     }
 }
+
+export const changeImageRequest = async (productId, imageId, token, formData) => {
+
+
+    try {
+
+        const imageResponse = await axios.patch(
+            `http://localhost:8080/image/${productId}/change_product_image/${imageId}`,
+            formData,//request body
+            {
+                
+                headers: {
+                    'Content-Type': 'multipart/form-data', // for images 'multipart/form-data
+                    Authorization: token,
+                },
+
+            }
+        );
+        console.log("imageResponse", imageResponse);
+        return imageResponse.data;
+    } catch (error) {
+        
+        console.log(error);
+
+    }
+}
+export const removeImageRequest = async (productId, imageId, token) => {
+
+    try {
+        const imageResponse = await axios.delete(
+            `http://localhost:8080/image/${productId}/delete_product_image/${imageId}`,
+            {
+                headers: {
+                    Authorization: token,
+                },
+            }
+        );
+        console.log("imageResponse", imageResponse);
+        return imageResponse.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const upload_product_image = async (productId, token, formData) => {
+
+    try {
+
+        const imageResponse = await axios.post(
+            `http://localhost:8080/image/${productId}/upload_product_image`,
+            formData,//request body
+            {
+                
+                headers: {
+                    'Content-Type': 'multipart/form-data', // for images 'multipart/form-data
+                    Authorization: token,
+                },
+
+            }
+        );
+        
+        localStorage.setItem('productImage', imageResponse.data)
+        console.log(imageResponse);
+        return imageResponse;
+    } catch (error) {
+        
+        console.log(error);
+
+    }
+
+}

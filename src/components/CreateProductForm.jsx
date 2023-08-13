@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation} from "react-router";
+import { upload_product_image } from "../service/client";
 
 function CreateProductForm() {
 
@@ -21,6 +22,7 @@ function CreateProductForm() {
     const [description, setDescription] = React.useState('');
     const [category, setCategory] = React.useState('');
     const [selectedFile, setSelectedFile] = React.useState(null);
+    
 
     useEffect(() => {
         setToken(jwt);
@@ -57,7 +59,7 @@ function CreateProductForm() {
         try {
             const response = await axios.post("http://localhost:8080/product/create_product", data, { headers });
             uploadImage(response.data.id);
-            
+            console.log("Product id: "+response.data.id);
         } catch (error) {
             console.log(error);
         }
@@ -72,27 +74,7 @@ function CreateProductForm() {
         const formData = new FormData();
         formData.append("file", selectedFile);
 
-        try {
-
-            const imageResponse = await axios.post(
-                `http://localhost:8080/image/${productId}/upload_product_image`,
-                formData,//request body
-                {
-                    
-                    headers: {
-                        'Content-Type': 'multipart/form-data', // for images 'multipart/form-data
-                        Authorization: token,
-                    },
-
-                }
-            );
-            console.log(imageResponse);
-        } catch (error) {
-            
-            console.log(error);
-
-        }
-
+        upload_product_image(productId, token, formData);
     }
 
     const handleImageChange = (e) => {

@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import "../css/App.css"
 import { Provider} from "react-redux";
 import store from "./redux/store";
+import "../css/global.scss"
 
 function App(){
 

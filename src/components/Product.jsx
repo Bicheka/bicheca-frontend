@@ -20,7 +20,6 @@ function Product(props) {
     const userInfo = useSelector(state => state.userInfo.userInfo);
     const location = useLocation();
     const [productImage, setProductImage] = useState('');
-
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
 
@@ -29,10 +28,14 @@ function Product(props) {
         const fetchProductImage = async () => {
             try{
                 
-                const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image/${props.imageIds[0]}`);
-                setProductImage(response.data);
+                if(props.imageIds.length > 0){
+                    const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image`);
+                    if(response.data){
+                        setProductImage(response.data.image);
+                    }
+                }
             } catch (error) {
-                console.log(error);
+                error.mesaage = "No image found";
             }
         }
         fetchProductImage();
@@ -106,11 +109,13 @@ function Product(props) {
                     </div>
                     {currentLocation === "admin-store" && role === "STORE" ? 
                         (
-                            <button onClick={handleDelete} className="deleteProductButton"><DeleteIcon/></button>
+            
+                            <DeleteIcon onClick={handleDelete} className="deleteProductButton"/>
+
                         )
                         : 
                         (
-                            <button onClick={addToCart} className="addToCartButton"><AddShoppingCartIcon/></button>
+                            <AddShoppingCartIcon onClick={addToCart} className="addToCartButton" />
                         )
                     }
                 </div>

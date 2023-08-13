@@ -19,7 +19,8 @@ function CartItem(props) {
             try{
                 
                 const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image/${props.imageIds[0]}`);
-                setItemImage(response.data);
+                console.log(response);
+                setItemImage(response.data.image);
                 console.log(response);
             } catch (error) {
                 console.log(error);
