@@ -19,7 +19,7 @@ function Product(props) {
     const jwt = useSelector(state => state.jwt.jwt);
     const userInfo = useSelector(state => state.userInfo.userInfo);
     const location = useLocation();
-    const [productImage, setProductImage] = useState('');
+    const [productImage, setProductImage] = useState(null);
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
 
@@ -49,7 +49,7 @@ function Product(props) {
         if(isLogged){
             setLogged(true);
         }
-        
+
     }, [userInfo, isLogged, jwt, props.id, props.imageIds]);
 
     async function addToCart(){
@@ -92,15 +92,32 @@ function Product(props) {
 
     return (
             <div className="product">
-                <Link to={`/product-details/${props.id}`}>
-                    <div className="productImg">
-                        <img
-                            className="product-img"
-                            src={`data:image/jpeg;base64,${productImage}`}
-                            alt="product"
-                        />                       
-                    </div>
-                </Link>
+                {
+                    currentLocation === "admin-store" && role === "STORE" ?
+                    (
+                        <Link to={`/admin-product-details/${props.id}`}>
+                            <div className="productImg">
+                                <img
+                                    className="product-img"
+                                    src={`data:image/jpeg;base64,${productImage}`}
+                                    alt="product"
+                                />                       
+                            </div>
+                        </Link>
+                    )
+                    :
+                    (
+                        <Link to={`/product-details/${props.id}`}>
+                            <div className="productImg">
+                                <img
+                                    className="product-img"
+                                    src={`data:image/jpeg;base64,${productImage}`}
+                                    alt="product"
+                                />                       
+                            </div>
+                        </Link>
+                    )
+                }
 
                 <div className="productFooter">
                     <div className="productInfo">

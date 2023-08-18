@@ -104,3 +104,32 @@ export const upload_product_image = async (productId, token, formData) => {
     }
 
 }
+
+export const createComment = async (productId, token, commentText, createdBy) => {
+    
+    try {
+
+        const commentResponse = await axios.post(
+            `http://localhost:8080/comment/create-comment`,
+            {
+                commentText,
+                createdBy,
+                productId
+            },
+            {
+                
+                headers: {
+                    Authorization: token,
+                },
+
+            }
+        );
+        
+        console.log(commentResponse);
+        return commentResponse;
+    } catch (error) {
+        
+        console.log(error);
+
+    }
+}

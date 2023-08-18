@@ -6,9 +6,10 @@ import Comments from "./Comments";
 import style from "../css/ProductDetails.module.scss"
 import ProductImage from "./ProductImage";
 import { useSelector } from "react-redux";
+import AddProductImage from "./AddProductImage";
 import FormatedDate from "./FormatedDate";
 
-function ProductDetails(props) {
+function AdminProductDetails(props) {
 
     const location = useLocation();
     console.log(location);
@@ -64,6 +65,10 @@ function ProductDetails(props) {
         setImages(newImages);
     }
 
+    const addImageUpdate = (image) => {
+        setImages([...images, image]);
+    }
+
     //re render images whenever images state changes
     useEffect(() => {
         console.log(images);
@@ -75,7 +80,6 @@ function ProductDetails(props) {
             <h2>{product.name}</h2>
             
             <div className={style.productImages}>
-
                 {images.map((image) => (
                     <ProductImage
                         key={image.id}
@@ -86,6 +90,9 @@ function ProductDetails(props) {
                         updateImages={updateImages}
                     />
                 ))}
+                
+                <AddProductImage productId = {id} addImage={addImageUpdate}/> 
+                
             </div>
             <p>${product.price}</p>    
             <p>Created at: </p>
@@ -94,15 +101,15 @@ function ProductDetails(props) {
             <hr className={style.hr}/>
             <p className={style.description}>{product.description}</p>
             
-            <button>Add to Cart</button>
-            <button>Buy Now</button>
+            <button disabled>Add to Cart</button>
+            <button disabled>Buy Now</button>
             
             <GoBackButton/>
             
-            <Comments id={id} ownerEmail={product.ownerEmail}/>
+            <Comments id={id} addCommentDisabled={true}/>
 
         </div>
     );
 }
 
-export default ProductDetails;
+export default AdminProductDetails;

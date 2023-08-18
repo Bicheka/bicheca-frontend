@@ -9,9 +9,12 @@ function Comment(props) {
     return (
         <div className="comment">
             <p>Created by: {props.createdBy}</p>
-            <p>{props.commentText}</p>
+            <p>"{props.commentText}"</p>
             <p>created at: {createdAt.toLocaleString()}</p>
-            <p>last updated: {lastUpdated.toLocaleString()}</p>
+            {
+                createdAt.getTime() !== lastUpdated.getTime() &&
+                <p>last updated: {lastUpdated.toLocaleString()}</p>
+            }
         </div>
     );
 }

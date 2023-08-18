@@ -29,6 +29,7 @@ import WorkIcon from '@mui/icons-material/Work';
 //hook
 import useCheckLogin from './hook/useCheckLogin';
 import { useSelector } from 'react-redux';
+import AdminProductDetails from './AdminProductDetails';
 function NavBar(){
 
     //active button
@@ -159,6 +160,7 @@ function NavBar(){
                 <Route exact path='/store-details/:storeId' element={<StoreDetails/>}/>
                 <Route exact path='/admin-store/:storeId' element={<AdminStore/>}/>
                 <Route exact path='/create-product/:storeId' element={<CreateProductForm/>}/>
+                <Route exact path='/admin-product-details/:productId' element={<AdminProductDetails/>}/>
             </Routes>
         </BrowserRouter>
         

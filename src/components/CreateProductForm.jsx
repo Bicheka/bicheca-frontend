@@ -58,22 +58,23 @@ function CreateProductForm() {
 
         try {
             const response = await axios.post("http://localhost:8080/product/create_product", data, { headers });
+            console.log(response);
             uploadImage(response.data.id);
             console.log("Product id: "+response.data.id);
         } catch (error) {
             console.log(error);
         }
 
-        //TODO: GET REDIRECTED WITHOUT GETTING LOGGED OUT
-        window.location.href = `/admin-store/${storeId}`; //redirect to the admin-store page while updating the page where we are redirected
+        redirect(); //redirect to the admin-store page while updating the page where we are redirected
     }
 
-
+    const redirect = () => {
+        window.location.href = `/admin-store/${storeId}`; //redirect to the admin-store page while updating the page where we are redirected
+    }
     const uploadImage = async (productId) => {
 
         const formData = new FormData();
         formData.append("file", selectedFile);
-
         upload_product_image(productId, token, formData);
     }
 
