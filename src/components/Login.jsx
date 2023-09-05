@@ -28,7 +28,7 @@ function Login(props) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/authenticate', { 
+      const response = await axios.post('https://bicheka-server-pyqmlkxaxq-ue.a.run.app', { 
         email,
         password 
       });

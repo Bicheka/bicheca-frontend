@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080";
+const API_URL = "https://bicheka-server-pyqmlkxaxq-ue.a.run.app";
 
 export const fetchUser = async (token) => {
 
@@ -40,7 +40,7 @@ export const changeImageRequest = async (productId, imageId, token, formData) =>
     try {
 
         const imageResponse = await axios.patch(
-            `http://localhost:8080/image/${productId}/change_product_image/${imageId}`,
+            API_URL+`/image/${productId}/change_product_image/${imageId}`,
             formData,//request body
             {
                 
@@ -63,7 +63,7 @@ export const removeImageRequest = async (productId, imageId, token) => {
 
     try {
         const imageResponse = await axios.delete(
-            `http://localhost:8080/image/${productId}/delete_product_image/${imageId}`,
+            API_URL+`/image/${productId}/delete_product_image/${imageId}`,
             {
                 headers: {
                     Authorization: token,
@@ -82,7 +82,7 @@ export const upload_product_image = async (productId, token, formData) => {
     try {
 
         const imageResponse = await axios.post(
-            `http://localhost:8080/image/${productId}/upload_product_image`,
+            API_URL`/image/${productId}/upload_product_image`,
             formData,//request body
             {
                 
@@ -110,7 +110,7 @@ export const createComment = async (productId, token, commentText, createdBy) =>
     try {
 
         const commentResponse = await axios.post(
-            `http://localhost:8080/comment/create-comment`,
+            API_URL`/comment/create-comment`,
             {
                 commentText,
                 createdBy,
