@@ -16,7 +16,7 @@ COPY . .
 # Build the React app
 RUN npm run build
 
-FROM nginx
+FROM nginx:latest
 
 # Copy the build output to replace the default nginx contents.
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
@@ -24,8 +24,11 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 #Copy the build output to replace the default nginx contents.
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose the port your application will run on (default for React is 3000)
-EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+ENV PORT=8080
+
+# Expose the custom port
+EXPOSE $PORT
+
+# Start Nginx with the custom port
+CMD ["nginx", "-g", "daemon off;"]
