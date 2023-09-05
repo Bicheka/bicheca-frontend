@@ -23,3 +23,9 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 #Copy the build output to replace the default nginx contents.
 COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
