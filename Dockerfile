@@ -24,8 +24,8 @@ COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 #Copy the build output to replace the default nginx contents.
 COPY --from=build /app/build /usr/share/nginx/html
 
-# # Expose the port your application will run on (default for React is 3000)
-# EXPOSE 3000
+# Expose the port your application will run on (default for React is 3000)
+EXPOSE 3000
 
-# # Start the application
-# CMD ["npm", "start"]
+# Start the application
+CMD ["npm", "start"]
