@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app-deployment
+spec:
+  replicas: 1 # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+        - name: react-app
+          image: us-east1-docker.pkg.dev/bicheka-396702/bicheka-repo/bicheka-396702/bicheka-frontend # Replace with your Docker image URL
+          ports:
+            - containerPort: 3000
