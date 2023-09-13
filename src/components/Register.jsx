@@ -63,7 +63,7 @@ function Register() {
       }
 
       //internal endpoint
-      axios.post('https://10.142.0.9/user/register', formData)
+      axios.post('https://bicheka-server-cd82f3aef573.herokuapp.com/user/register', formData)
         .then(() => { //then set all the input fields to empty again
           setFormData({
             firstName: '',

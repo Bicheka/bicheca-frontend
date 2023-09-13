@@ -10,7 +10,7 @@ function Products() {
     useEffect(() => {
         const fetchProducts = async () => {
             try{
-                const response = await axios.get('https://bicheka-server-pyqmlkxaxq-ue.a.run.app/product/get_all_products');
+                const response = await axios.get('https://bicheka-server-cd82f3aef573.herokuapp.com/product/get_all_products');
                 setProductList(response.data);
             } catch (error) {
                 console.log(error);
