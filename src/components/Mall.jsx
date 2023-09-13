@@ -14,7 +14,7 @@ function Mall() {
         const fetchStores = async () => {
             try{
                 //load balance ip
-                const response = await axios.get('https://bicheka-server-cd82f3aef573.herokuapp.com/store/get_all_stores');
+                const response = await axios.get('http://localhost:8080/store/get_all_stores');
                 setStores(response.data);
             } catch (error) {
                 console.log(error);

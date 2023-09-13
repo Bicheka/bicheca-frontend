@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://34.148.254.129:8080";
+const API_URL = "http://localhost:8080";
 
 export const fetchUser = async (token) => {
 

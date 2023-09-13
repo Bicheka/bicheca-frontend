@@ -29,7 +29,7 @@ function Login(props) {
     e.preventDefault();
     try {
       //external ip address
-      const response = await axios.post('https://bicheka-server-cd82f3aef573.herokuapp.com', { 
+      const response = await axios.post('http://localhost:8080', { 
         email,
         password 
       });
