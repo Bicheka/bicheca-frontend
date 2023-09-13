@@ -6,6 +6,5 @@ resources:
   - service.yml
 
 images:
-  - name: gcr.io/your-project-id/your-react-app
-    newName: us-central1-docker.pkg.dev/your-project-id/your-repo-name/your-react-app
-    newTag: latest
+  - name: us-east1-docker.pkg.dev/bicheka-396702/bicheka-repo/frontend
+    newName: $GAR_LOCATION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE:$GITHUB_SHA
