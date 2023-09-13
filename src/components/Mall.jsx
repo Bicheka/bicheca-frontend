@@ -13,7 +13,8 @@ function Mall() {
     useEffect(() => {
         const fetchStores = async () => {
             try{
-                const response = await axios.get('https://bicheka-server-pyqmlkxaxq-ue.a.run.app/store/get_all_stores');
+                //load balance ip
+                const response = await axios.get('http://34.148.254.129:8080/store/get_all_stores');
                 setStores(response.data);
             } catch (error) {
                 console.log(error);

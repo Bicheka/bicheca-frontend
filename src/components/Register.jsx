@@ -62,7 +62,8 @@ function Register() {
         return;
       }
 
-      axios.post('https://bicheka-server-pyqmlkxaxq-ue.a.run.app/user/register', formData)
+      //internal endpoint
+      axios.post('https://10.142.0.9/user/register', formData)
         .then(() => { //then set all the input fields to empty again
           setFormData({
             firstName: '',

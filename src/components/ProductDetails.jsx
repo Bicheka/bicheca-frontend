@@ -24,7 +24,8 @@ function ProductDetails(props) {
 
         const fetchProduct = async () => {
             try{
-                const response = await axios.get(`http://localhost:8080/product/get_product_by_id/${id}`);
+                //subnet gateway ip address
+                const response = await axios.get(`http://10.142.0.1:8080/product/get_product_by_id/${id}`);
                 setProduct(response.data);
                 console.log(response.data);
             } catch (error) {

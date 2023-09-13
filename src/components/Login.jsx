@@ -28,7 +28,8 @@ function Login(props) {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bicheka-server-pyqmlkxaxq-ue.a.run.app', { 
+      //external ip address
+      const response = await axios.post('http://34.75.122.186:8080', { 
         email,
         password 
       });

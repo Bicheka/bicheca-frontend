@@ -1,34 +1,13 @@
-# Use an official Node.js runtime as the base image
-FROM node:18 as build
+FROM node:18.17.0 as build
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the working directory
 COPY package*.json .
-
-# Install application dependencies
 RUN npm install
-
-# # Copy the rest of the application files to the working directory
-# COPY . .
-
-# Build the React app
+COPY . .
 RUN npm run build
 
-# FROM nginx:latest
+FROM nginx
 
-# # Copy the build output to replace the default nginx contents.
-# COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-
-# #Copy the build output to replace the default nginx contents.
-# COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose port 80
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
-
-# # Start nginx
-# CMD ["nginx", "-g", "daemon off;"]
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/build /usr/share/nginx/html
