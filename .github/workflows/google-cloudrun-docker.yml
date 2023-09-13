@@ -95,7 +95,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         run: |-
-          gcloud run deploy "${{ env.PROJECT_ID }}/${{ env.SERVICE }}" \
+          gcloud run deploy "${{ env.SERVICE }}" \
           --region "${{ env.REGION }}" \
           --image "${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID }}/${{ env.SERVICE }}:${{ github.sha }}" \
           --platform "managed" \
