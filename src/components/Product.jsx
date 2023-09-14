@@ -15,7 +15,7 @@ function Product(props) {
     // const navigate = useNavigate();
 
     const isLogged = useSelector(state => state.login.isLogged);
-    const [token, setToken] = useState('');
+    
     const [logged , setLogged] = useState(false);
     const jwt = useSelector(state => state.jwt.jwt);
     const userInfo = useSelector(state => state.userInfo.userInfo);
@@ -24,6 +24,7 @@ function Product(props) {
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
 
+    // TODO: check for infinite loops later
     useEffect(() => {
 
         const fetchProductImage = async () => {
@@ -44,14 +45,12 @@ function Product(props) {
         if(userInfo){
             setRole(userInfo.role);
         }
-        if(jwt){
-            setToken(jwt);
-        }
+        
         if(isLogged){
             setLogged(true);
         }
 
-    }, [userInfo, isLogged, jwt, props.id, props.imageIds]);
+    }, [userInfo, isLogged, props.id, props.imageIds]);
 
     async function addToCart(){
         if(logged){
@@ -61,7 +60,7 @@ function Product(props) {
                     {},//request body
                     {
                       headers: {
-                        Authorization: token,
+                        Authorization: jwt,
                       },
                     }
                 );
@@ -80,7 +79,7 @@ function Product(props) {
                 `http://localhost:8080/product/delete_product/${props.id}`,
                 {
                     headers: {
-                        Authorization: token,
+                        Authorization: jwt,
                     },
                 }
             );
