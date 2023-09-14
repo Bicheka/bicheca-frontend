@@ -8,9 +8,11 @@ import { API_URL } from "./global/GlobalConsts"
 function Cart() {
 
     const isLogged = useSelector(state => state.login.isLogged);
-    const token = localStorage.getItem('token');
+    const jwt = useSelector(state => state.jwt.jwt);
     const [total, setTotal] = useState("0");
     const [cart, setCart] = useState([]);
+
+    console.log("jwt "+jwt);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -19,7 +21,7 @@ function Cart() {
                     const response = await axios.get(API_URL+'/cart/get-cart', 
                     {
                         headers: {
-                            Authorization: token,
+                            Authorization: jwt,
                         }
                     });
                     setCart(response.data);
@@ -38,7 +40,7 @@ function Cart() {
         
 
 
-    }, [isLogged, token]);
+    }, [isLogged, jwt]);
 
     function removeFromCart(id) {
         setCart(cart.filter((item) => item.product.id !== id));

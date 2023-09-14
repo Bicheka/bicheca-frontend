@@ -28,26 +28,21 @@ function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    // console.log("Login button clicked");
-    // console.log(email);
-    // console.log(password);
+    console.log("Login button clicked");
+    console.log(email);
+    console.log(password);
 
     try {
-
 
       const response = await axios.post(API_URL+'/authenticate', { 
         email,
         password 
       });
-
-
-      // console.log("response")
-      // console.log(response.headers.authorization)
-
+      
       let token = response.headers.authorization;
-      // console.log("token "+token);
-      dispatch(setJwt(token));  //store the token in redux (globally)
+  
 
+      dispatch(setJwt(token));  //store the token in redux (globally)
       // localStorage.setItem('token', token); //store the token in local storage (globally)
 
       // console.log("here should be the token -> " + token);
@@ -59,16 +54,16 @@ function Login(props) {
         document.cookie = `token=${token};expires=${date.toUTCString()}`;
       } 
 
-      // const user = await fetchUser(token);
-      // console.log(user);
+      const user = await fetchUser(token);
+      console.log(user);
 
-      // // setUserName(user.data.firstName);
-      // dispatch(setIsLogged(true));
-      // dispatch(setUserInfo(user.data));
+      // setUserName(user.data.firstName);
+      dispatch(setIsLogged(true));
+      dispatch(setUserInfo(user.data));
       
-      // console.log(user.data);
+      console.log(user.data);
       
-      // navigate('/'); //redirect to home page after login
+      navigate('/'); //redirect to home page after login
 
     } catch (erroR) {
       setError(erroR);
@@ -77,8 +72,6 @@ function Login(props) {
     }
   
   };
-
-  //<h1>{isLogged ? "Hello "+userName : ""}</h1>  //conditional rendering
 
   return (
     <div className="login">
