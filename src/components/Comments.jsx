@@ -4,6 +4,8 @@ import Comment from "./Comment";
 import "../css/Comments.css";
 import AddCommentForm from "./AddCommentForm";
 import { useSelector } from "react-redux";
+import { API_URL } from "./global/GlobalConsts"
+
 function Comments(props) {
 
     const [commentList, setCommentList] = useState([]);
@@ -15,7 +17,7 @@ function Comments(props) {
     useEffect(() => {
         const fetchComments = async () => {
             try{
-                const response = await axios.get(`http://localhost:8080/comment/get-comments/${props.id}`);
+                const response = await axios.get(API_URL+`/comment/get-comments/${props.id}`);
                 setCommentList(response.data);
                 console.log(response);
             } catch (error) {

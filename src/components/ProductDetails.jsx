@@ -7,6 +7,7 @@ import style from "../css/ProductDetails.module.scss"
 import ProductImage from "./ProductImage";
 import { useSelector } from "react-redux";
 import FormatedDate from "./FormatedDate";
+import { API_URL } from "./global/GlobalConsts"
 
 function ProductDetails(props) {
 
@@ -24,8 +25,7 @@ function ProductDetails(props) {
 
         const fetchProduct = async () => {
             try{
-                //subnet gateway ip address
-                const response = await axios.get(`http://10.142.0.1:8080/product/get_product_by_id/${id}`);
+                const response = await axios.get(API_URL+`/product/get_product_by_id/${id}`);
                 setProduct(response.data);
                 console.log(response.data);
             } catch (error) {

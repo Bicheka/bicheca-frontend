@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import '../css/Cart.css';
 import { useSelector } from "react-redux";
-
+import { API_URL } from "./global/GlobalConsts"
 
 function Cart() {
 
@@ -16,7 +16,7 @@ function Cart() {
         const fetchProducts = async () => {
             if(isLogged){
                 try{
-                    const response = await axios.get('http://localhost:8080/cart/get-cart', 
+                    const response = await axios.get(API_URL+'/cart/get-cart', 
                     {
                         headers: {
                             Authorization: token,

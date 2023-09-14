@@ -7,6 +7,7 @@ import { setUserInfo } from './redux/slices/userInfoSlice';
 import { useNavigate } from 'react-router';
 import { setIsLogged } from './redux/slices/loginSlices';
 import { fetchUser } from '../service/client';
+import { API_URL } from "./global/GlobalConsts"
 
 function Login(props) {
   const [email, setemail] = useState('');
@@ -29,7 +30,7 @@ function Login(props) {
     e.preventDefault();
     try {
       //external ip address
-      const response = await axios.post('http://localhost:8080', { 
+      const response = await axios.post(API_URL, { 
         email,
         password 
       });

@@ -3,7 +3,7 @@ import GoBackButton from "./GoBackButton";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router";
 import Product from "./Product";
-
+import { API_URL } from "./global/GlobalConsts"
 function AdminStore() {
 
     const [storeName, setStoreName] = useState("");
@@ -18,7 +18,7 @@ function AdminStore() {
     useEffect(() => {
         const fetchProducts = async () => {
             try{
-                const response = await axios.get(`http://localhost:8080/store/get_store/${storeId}`);
+                const response = await axios.get(API_URL+`/store/get_store/${storeId}`);
                 setProducts(response.data.products)
                 setStoreName(response.data.storeName);
                 console.log(response);

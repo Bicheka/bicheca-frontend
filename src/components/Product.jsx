@@ -8,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import { API_URL } from "./global/GlobalConsts"
 
 function Product(props) {
 
@@ -29,7 +30,7 @@ function Product(props) {
             try{
                 
                 if(props.imageIds.length > 0){
-                    const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image`);
+                    const response = await axios.get(API_URL+`/image/${props.id}/get_product_image`);
                     if(response.data){
                         setProductImage(response.data.image);
                     }
@@ -56,7 +57,7 @@ function Product(props) {
         if(logged){
             try{
                 await axios.patch(
-                    `http://localhost:8080/cart/add-product-to-cart/${props.id}`,
+                    API_URL+`/cart/add-product-to-cart/${props.id}`,
                     {},//request body
                     {
                       headers: {

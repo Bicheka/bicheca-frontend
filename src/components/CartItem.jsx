@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import "../css/Cart.css"
 import { Link } from "react-router-dom";
+import { API_URL } from "./global/GlobalConsts"
 
 function CartItem(props) {
 
@@ -18,7 +19,7 @@ function CartItem(props) {
         const fetchProductImage = async () => {
             try{
                 
-                const response = await axios.get(`http://localhost:8080/image/${props.id}/get_product_image/${props.imageIds[0]}`);
+                const response = await axios.get(API_URL+`/image/${props.id}/get_product_image/${props.imageIds[0]}`);
                 console.log(response);
                 setItemImage(response.data.image);
                 console.log(response);
@@ -36,7 +37,7 @@ function CartItem(props) {
         if(token){
             try{
                 await axios.patch(
-                    `http://localhost:8080/cart/remove-from-cart/${props.id}`,
+                    API_URL+`/cart/remove-from-cart/${props.id}`,
                     {},//request body
                     {
                       headers: {
@@ -69,7 +70,7 @@ function CartItem(props) {
         let config = {
             method: 'patch',
             maxBodyLength: Infinity,
-            url: `http://localhost:8080/cart/update-product-quantity/${props.id}`,
+            url: API_URL+`/cart/update-product-quantity/${props.id}`,
             headers: { 
               'Content-Type': 'application/json', 
               'Authorization': token

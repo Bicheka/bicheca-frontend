@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 import '../css/Register.css';
+import { API_URL } from "./global/GlobalConsts"
 
 function Register() {
 
@@ -63,7 +64,7 @@ function Register() {
       }
 
       //internal endpoint
-      axios.post('https://bicheka-server-cd82f3aef573.herokuapp.com/user/register', formData)
+      axios.post(API_URL+'/user/register', formData)
         .then(() => { //then set all the input fields to empty again
           setFormData({
             firstName: '',

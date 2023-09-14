@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUserInfo } from './redux/slices/userInfoSlice';
 import { useNavigate } from 'react-router';
+import { API_URL } from "./global/GlobalConsts"
 
 function Account(){
 
@@ -53,7 +54,7 @@ function Account(){
         const data = { storeName };
         const headers = { Authorization: `Bearer ${token}` };
         try {
-            await axios.post('http://localhost:8080/store/create_store', data, { headers })
+            await axios.post(API_URL+'/store/create_store', data, { headers })
             .then(response => {
                 if(response.status === 200){
                     setStoreNameExists(false);

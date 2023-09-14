@@ -4,6 +4,7 @@ import axios from "axios";
 import { useLocation } from "react-router";
 import Product from "./Product";
 import { useSelector } from "react-redux";
+import { API_URL } from "./global/GlobalConsts"
 
 function StoreDetails() {
 
@@ -19,7 +20,7 @@ function StoreDetails() {
             try{
 
                 const response = await axios.get(
-                    `http://localhost:8080/store/get_store/${id}`,
+                    API_URL+`/store/get_store/${id}`,
                     {},//request body
                     {
                       headers: {

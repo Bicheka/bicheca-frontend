@@ -8,6 +8,7 @@ import ProductImage from "./ProductImage";
 import { useSelector } from "react-redux";
 import AddProductImage from "./AddProductImage";
 import FormatedDate from "./FormatedDate";
+import { API_URL } from "./global/GlobalConsts"
 
 function AdminProductDetails(props) {
 
@@ -18,6 +19,7 @@ function AdminProductDetails(props) {
     const [images, setImages] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
     const user = useSelector(state => state.userInfo.userInfo);
+    
 
     useEffect(() => {
 
@@ -25,7 +27,7 @@ function AdminProductDetails(props) {
 
         const fetchProduct = async () => {
             try{
-                const response = await axios.get(`http://localhost:8080/product/get_product_by_id/${id}`);
+                const response = await axios.get(API_URL+`/product/get_product_by_id/${id}`);
                 setProduct(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -37,7 +39,7 @@ function AdminProductDetails(props) {
         const fetchImages = async () => {
             
             try{
-                const response = await axios.get(`http://localhost:8080/image/${id}/get_product_images`);
+                const response = await axios.get(API_URL+`/image/${id}/get_product_images`);
                 setImages(response.data);
                 console.log(response);
             } catch (error) {

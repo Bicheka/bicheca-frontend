@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation} from "react-router";
 import { upload_product_image } from "../service/client";
-
+import { API_URL } from "./global/GlobalConsts"
 function CreateProductForm() {
 
     const location = useLocation();
@@ -57,7 +57,7 @@ function CreateProductForm() {
         const headers = { Authorization: `Bearer ${token}` };
 
         try {
-            const response = await axios.post("http://localhost:8080/product/create_product", data, { headers });
+            const response = await axios.post(API_URL+"/product/create_product", data, { headers });
             console.log(response);
             uploadImage(response.data.id);
             console.log("Product id: "+response.data.id);
