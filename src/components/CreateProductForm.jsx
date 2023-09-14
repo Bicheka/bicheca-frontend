@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useLocation} from "react-router";
 import { upload_product_image } from "../service/client";
@@ -10,8 +10,6 @@ function CreateProductForm() {
     
     const jwt = useSelector(state => state.jwt.jwt);
     // const navigate = useNavigate();
-
-    const [token, setToken] = React.useState('');
 
     const storeId = location.pathname.split("/")[2];
 
@@ -24,10 +22,7 @@ function CreateProductForm() {
     const [selectedFile, setSelectedFile] = React.useState(null);
     
 
-    useEffect(() => {
-        setToken(jwt);
-    }, [jwt]);
-
+    
     const handleCreateProduct = async (e) => {
         e.preventDefault();
 
@@ -54,13 +49,12 @@ function CreateProductForm() {
         console.log(product);
 
         const data = product;
-        const headers = { Authorization: `Bearer ${token}` };
+        const headers = { Authorization: `Bearer ${jwt}` };
 
         try {
-            const response = await axios.post(API_URL+"/product/create_product", data, { headers });
+            const response = await axios.post(API_URL+`/product/create_product`, data, { headers });
             console.log(response);
             uploadImage(response.data.id);
-            console.log("Product id: "+response.data.id);
         } catch (error) {
             console.log(error);
         }
@@ -75,7 +69,7 @@ function CreateProductForm() {
 
         const formData = new FormData();
         formData.append("file", selectedFile);
-        upload_product_image(productId, token, formData);
+        upload_product_image(productId, jwt, formData);
     }
 
     const handleImageChange = (e) => {

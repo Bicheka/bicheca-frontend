@@ -83,7 +83,7 @@ export const upload_product_image = async (productId, token, formData) => {
     try {
 
         const imageResponse = await axios.post(
-            API_URL`/image/${productId}/upload_product_image`,
+            API_URL+`/image/${productId}/upload_product_image`,
             formData,//request body
             {
                 

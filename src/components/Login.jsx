@@ -43,7 +43,7 @@ function Login(props) {
   
 
       dispatch(setJwt(token));  //store the token in redux (globally)
-      // localStorage.setItem('token', token); //store the token in local storage (globally)
+      localStorage.setItem('token', token); //store the token in local storage (globally)
 
       // console.log("here should be the token -> " + token);
 

@@ -25,7 +25,7 @@ function Account(){
     const [isCreatingStore, setIsCreatingStore] = useState(false);
     const [storeName, setStoreName] = useState('');
     const [logged , setLogged] = useState(false);
-    const [token, setToken] = useState('');
+    const jwt = useSelector(state => state.jwt.jwt);
     const [storeNameExists, setStoreNameExists] = useState(false);
     
     useEffect(() => {
@@ -40,9 +40,6 @@ function Account(){
         if(isLogged){
             setLogged(true);
         }
-        if(localStorage.getItem('token')){
-            setToken(localStorage.getItem('token'));
-        }
     }, [isLogged, user]);
 
     const changeCreatingStore = () => {
@@ -52,7 +49,7 @@ function Account(){
     const handleCreateStore = async (event) => {
         event.preventDefault();
         const data = { storeName };
-        const headers = { Authorization: `Bearer ${token}` };
+        const headers = { Authorization: `Bearer ${jwt}` };
         try {
             await axios.post(API_URL+'/store/create_store', data, { headers })
             .then(response => {

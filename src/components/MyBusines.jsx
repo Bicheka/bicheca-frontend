@@ -2,20 +2,21 @@ import React, { useEffect, useState } from "react";
 import Store from "./Store";
 import '../css/MyBusiness.css';
 import {getUserStores} from '../service/client';
+import { useSelector } from "react-redux";
 
 function MyBusines() {
 
   // const jwt = useSelector(state => state.jwt.jwt);
-  const token = localStorage.getItem('token');
+  const jwt = useSelector(state => state.jwt.jwt);
   const [stores, setStores] = useState([]);
 
   useEffect(() => {
-    console.log("token: ", token);
+    
     const fetchUserStores = async () => {
-      setStores(await getUserStores(token));
+      setStores(await getUserStores(jwt));
     };
     fetchUserStores();
-  }, [token]);
+  }, [jwt]);
 
   return (
     <div>
