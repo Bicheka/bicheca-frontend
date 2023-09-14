@@ -101,6 +101,7 @@ jobs:
           --platform "managed" \
           --quiet \
           --allow-unauthenticated \
+          --port 80 \
 
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
