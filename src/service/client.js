@@ -10,6 +10,8 @@ export const fetchUser = async (token) => {
             }
         });
 
+        console.log("user", user);
+
         return user.data;
 
     } catch (error) {

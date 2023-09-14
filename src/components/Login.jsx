@@ -28,19 +28,29 @@ function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    // console.log("Login button clicked");
+    // console.log(email);
+    // console.log(password);
+
     try {
-      //external ip address
-      const response = await axios.post(API_URL, { 
+
+
+      const response = await axios.post(API_URL+'/authenticate', { 
         email,
         password 
       });
 
+
+      // console.log("response")
+      // console.log(response.headers.authorization)
+
       let token = response.headers.authorization;
+      // console.log("token "+token);
       dispatch(setJwt(token));  //store the token in redux (globally)
 
-      localStorage.setItem('token', token); //store the token in local storage (globally)
+      // localStorage.setItem('token', token); //store the token in local storage (globally)
 
-      console.log("here should be the token -> " + token);
+      // console.log("here should be the token -> " + token);
 
       if (rememberMe) {
         // Set the token in a persistent cookie that expires after 30 days
@@ -49,15 +59,16 @@ function Login(props) {
         document.cookie = `token=${token};expires=${date.toUTCString()}`;
       } 
 
-      const user = await fetchUser(token);
+      // const user = await fetchUser(token);
+      // console.log(user);
 
-      // setUserName(user.data.firstName);
-      dispatch(setIsLogged(true));
-      dispatch(setUserInfo(user.data));
+      // // setUserName(user.data.firstName);
+      // dispatch(setIsLogged(true));
+      // dispatch(setUserInfo(user.data));
       
-      console.log(user.data);
+      // console.log(user.data);
       
-      navigate('/'); //redirect to home page after login
+      // navigate('/'); //redirect to home page after login
 
     } catch (erroR) {
       setError(erroR);
