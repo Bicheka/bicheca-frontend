@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Link , Routes, Route} from "react-router-dom";
 
 //css
-import '../css/NavBar.css';
+import '../css/NavBar.scss'
 
 //components
 // import Account from './Account';
@@ -18,18 +18,12 @@ import StoreDetails from './StoreDetails';
 import AdminStore from './AdminStore';
 import CreateProductForm from './CreateProductForm';
 
-//icons
-import MallIcon from '@mui/icons-material/StoreMallDirectory';
-import PersonIcon from '@mui/icons-material/Person';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import ProductIcon from '@mui/icons-material/Category';
-import LoginIcon from '@mui/icons-material/Login';
-import WorkIcon from '@mui/icons-material/Work';
-
 //hook
 import useCheckLogin from './hook/useCheckLogin';
 import { useSelector } from 'react-redux';
 import AdminProductDetails from './AdminProductDetails';
+
+
 function NavBar(){
 
     //active button
@@ -69,17 +63,25 @@ function NavBar(){
     return (
         <BrowserRouter forceRefresh = {true}>
             <div className="navBar">
+
+                <div className='navBarLogo'>
+                    <Link to = "/">
+                        <h2 className='navBarLogoText'>Bicheka</h2>
+                    </Link>
+                </div>
+
+
+            <div className='navBarButtons'>
                 <div className="navBarItem">
                     
-                        <Link 
-                            to = "/"
-                            className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('')}
-                        >
-                            <MallIcon className = "mallIcon" />
-                            <p>Mall</p>
-                        </Link>
-                    
+                    <Link 
+                        to = "/"
+                        className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
+                        onClick = {() => handleActiveButton('')}
+                    >
+                        <p className='navBarButtonText'>Mall</p>
+                    </Link>
+                
                 </div>
                 <div className="navBarItem">
                     
@@ -88,8 +90,7 @@ function NavBar(){
                             className={`navBarButton ${activeButton === 'products' ? 'active' : ''}`}
                             onClick = {() => handleActiveButton('products')}
                         >
-                            <ProductIcon className = "productIcon" />
-                            <p>Products</p>
+                            <p className='navBarButtonText'>Products</p>
                         </Link>
                     
                 </div>
@@ -100,8 +101,7 @@ function NavBar(){
                         className={`navBarButton ${activeButton === 'cart' ? 'active' : ''}`}
                         onClick = {() => handleActiveButton('cart')}
                     >
-                        <ShoppingCartIcon className = "cartIcon" />
-                        <p>Cart</p>
+                        <p className='navBarButtonText'>Cart</p>
                     </Link>
                     
                 </div>
@@ -114,8 +114,7 @@ function NavBar(){
                             className={`navBarButton ${activeButton === 'account' ? 'active' : ''}`}
                             onClick = {() => handleActiveButton('account')}
                         >
-                            <PersonIcon className = "accountIcon" />
-                            <p>Account</p>
+                            <p className='navBarButtonText'>Account</p>
                             </Link> 
                             : //if not logged in show login button
                             <div className="navBarItem">
@@ -124,27 +123,26 @@ function NavBar(){
                                     className={`navBarButton ${activeButton === 'login' ? 'active' : ''}`}
                                     onClick = {() => handleActiveButton('login')}
                                 >
-                                    <LoginIcon className = "loginIcon" />
-                                    <p>Login/SignUp</p>
+                                    <p className='navBarButtonText'>Login/SignUp</p>
                                 </Link>
                             </div>
                         }
                 
                 </div>
-            
-                    <div className="navBarItem">
-                    
-                        {isStore &&
-                            <Link 
-                                to = "/mybusines"
-                                className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
-                                onClick = {() => handleActiveButton('mybusines')}
-                            >
-                                <WorkIcon className = "mybusinesIcon" />
-                                <p>My Business</p>
-                            </Link>
-                        }
-                    </div>
+        
+                <div className="navBarItem">
+                
+                    {isStore &&
+                        <Link 
+                            to = "/mybusines"
+                            className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
+                            onClick = {() => handleActiveButton('mybusines')}
+                        >
+                            <p className='navBarButtonText'>My Business</p>
+                        </Link>
+                    }
+                </div>
+            </div>
             
                 
             </div>
