@@ -1,0 +1,57 @@
+.navBar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px; /* Add padding to the navbar */
+}
+
+@media screen and (max-width: 992px) {
+    // .navBar{
+        
+    // }
+
+}
+
+.navBarLogo{
+    display: flex; /* Ensure the logo and buttons are on the same row */
+    align-items: center; /* Vertically align the logo and buttons */
+}
+.navBarLogoText{
+    font-size: 24px; /* Customize the logo text size */
+    text-decoration: none;
+    color: black;
+    align-items: center;
+}
+
+.active{
+    border-bottom: solid 2px black;
+}
+
+.navBarButtons {
+    display: flex; /* Make the buttons container a flex container */
+    gap: 2em; /* Add some gap between the buttons */
+    align-items: center; /* Vertically align the buttons */
+    margin-right: 3em;
+  }
+
+.navBarButtonText{
+    display: inline;
+    font-size: 1em;
+}
+
+.navBarItem{
+    margin-right: 20px;
+}
+
+.navBarButtonText:hover{
+    border-bottom: solid 2px black;
+}
+
+
+link{
+    text-decoration: none;
+}
+Link{
+    text-decoration: none;
+}
+
