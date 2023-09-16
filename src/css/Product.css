@@ -8,11 +8,11 @@
     width: 200px;
     height: 200px;
     color: rgb(23, 23, 28);
-    background-color: #e6e6e6;
     text-align: center;
     border-radius: 10px;
     display: block;
     position: relative;
+    box-shadow: 0 0 10px rgba(97, 97, 97, 0.5);
 }
 
 .productImg img{

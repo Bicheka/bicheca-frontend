@@ -5,6 +5,7 @@ import { useLocation } from "react-router";
 import Product from "./Product";
 import { useSelector } from "react-redux";
 import { API_URL } from "./global/GlobalConsts"
+import "../css/Products.scss";
 
 function StoreDetails() {
 
@@ -47,7 +48,7 @@ function StoreDetails() {
     return (
         <div>
             <h1>{storeName + " products"}</h1>
-            <div className="mall">
+            <div className="products">
                     {products.map(product => (
                         <Product 
                             key={product.id} 

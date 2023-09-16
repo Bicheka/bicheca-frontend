@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import CartItem from "./CartItem";
-import '../css/Cart.css';
+import '../css/Cart.scss';
 import { useSelector } from "react-redux";
 import { API_URL } from "./global/GlobalConsts"
 

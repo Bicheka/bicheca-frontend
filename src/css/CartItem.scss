@@ -1,0 +1,25 @@
+/* Styling for the quantity container */
+.quantity {
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the label */
+.cartItemQuantityLabel {
+    margin-right: 10px; /* Add some spacing between label and select */
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+/* Styling for the select element */
+.cartItemQuantitySelect {
+    padding: 5px; /* Add padding to make it look better */
+    border: 1px solid #ccc; /* Add a border for a container effect */
+    border-radius: 4px; /* Rounded corners for aesthetics */
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+/* Optional: Style select options for consistency */
+.cartItemQuantitySelect option {
+    font-size: 14px; /* Match font size with the select */
+}

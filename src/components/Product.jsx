@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../css/Product.css";
+// import "../css/Product.css";
+import "../css/Product.scss";
 
 //icons
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -23,6 +24,9 @@ function Product(props) {
     const [productImage, setProductImage] = useState(null);
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
+
+
+    const defaultImage = "../../imagePlaceholder.jpg";
 
     // TODO: check for infinite loops later
     useEffect(() => {
@@ -99,7 +103,7 @@ function Product(props) {
                             <div className="productImg">
                                 <img
                                     className="product-img"
-                                    src={`data:image/jpeg;base64,${productImage}`}
+                                    src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
                                     alt="product"
                                 />                       
                             </div>
@@ -111,7 +115,7 @@ function Product(props) {
                             <div className="productImg">
                                 <img
                                     className="product-img"
-                                    src={`data:image/jpeg;base64,${productImage}`}
+                                    src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
                                     alt="product"
                                 />                       
                             </div>
@@ -119,11 +123,10 @@ function Product(props) {
                     )
                 }
 
-                <div className="productFooter">
-                    <div className="productInfo">
-                        <p className="productName">{props.name}</p>
-                        <p className="productPrice">${props.price}</p>   
-                    </div>
+                <div className="product-info">
+                    <p className="productName">{props.name}</p>
+                    <p className="productDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ....</p>
+                    <p className="productPrice">${props.price}</p>   
                     {currentLocation === "admin-store" && role === "STORE" ? 
                         (
             
