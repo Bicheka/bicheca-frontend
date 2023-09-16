@@ -18,6 +18,9 @@ import StoreDetails from './StoreDetails';
 import AdminStore from './AdminStore';
 import CreateProductForm from './CreateProductForm';
 
+//icons
+
+
 //hook
 import useCheckLogin from './hook/useCheckLogin';
 import { useSelector } from 'react-redux';
@@ -94,6 +97,20 @@ function NavBar(){
                         </Link>
                     
                 </div>
+
+                <div className="navBarItem">
+                
+                    {isStore &&
+                        <Link 
+                            to = "/mybusines"
+                            className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
+                            onClick = {() => handleActiveButton('mybusines')}
+                        >
+                            <p className='navBarButtonText'>My Business</p>
+                        </Link>
+                    }
+                </div>
+
                 <div className="navBarItem">
                     
                     <Link 
@@ -129,19 +146,11 @@ function NavBar(){
                         }
                 
                 </div>
-        
+
                 <div className="navBarItem">
-                
-                    {isStore &&
-                        <Link 
-                            to = "/mybusines"
-                            className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('mybusines')}
-                        >
-                            <p className='navBarButtonText'>My Business</p>
-                        </Link>
-                    }
+                        <img className='searchIcon' src = "../../search.png" alt='search' />
                 </div>
+        
             </div>
             
                 

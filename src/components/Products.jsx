@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import axios from "axios";
-import "../css/Products.css";
+// import "../css/Products.css";
+import "../css/Products.scss";
 import { API_URL } from "./global/GlobalConsts"
 
 function Products() {

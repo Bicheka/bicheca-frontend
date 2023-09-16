@@ -8,7 +8,6 @@ function ProductImage(props) {
     const [selectedFile, setSelectedFile] = useState(null); //selected file from input[type=file
     const [isFormActive, setIsFormActive] = useState(false); //selected file from input[type=file
     const [image, setImage] = useState(null); //selected file from input[type=file
-    
 
     const {updateImages} = props;
 

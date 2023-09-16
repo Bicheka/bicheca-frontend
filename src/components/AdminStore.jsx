@@ -47,7 +47,7 @@ function AdminStore() {
             
             <GoBackButton/>
 
-            <div className="mall">
+            <div className="products">
                 {products.map(product => (
                     <Product 
                         key={product.id} 

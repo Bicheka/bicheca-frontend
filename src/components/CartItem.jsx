@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import axios from "axios";
 import { useSelector } from "react-redux";
-import "../css/Cart.css"
+// import "../css/Cart.css"
+import "../css/Product.scss"
+import "../css/CartItem.scss"
 import { Link } from "react-router-dom";
 import { API_URL } from "./global/GlobalConsts"
 
@@ -13,6 +15,8 @@ function CartItem(props) {
     const [token, setToken] = useState('');
     const [quantity, setQuantity] = useState(props.quantity);
     const [itemImage, setItemImage] = useState('');
+
+    const defaultImage = "../../imagePlaceholder.jpg";
 
     useEffect(() => {
 
@@ -86,24 +90,23 @@ function CartItem(props) {
     }
 
     return (
-        <div className="cartItem">
+        <div className="product">
             <Link to={`/product-details/${props.id}`}>
             <div className="productImg">
                         <img
                             className="product-img"
-                            src={`data:image/jpeg;base64,${itemImage}`}
+                            src={itemImage ? `data:image/jpeg;base64,${itemImage}` : defaultImage}
                             alt="itemImg"
                         />                       
                     </div>
             </Link>
-            <div className="cartItemInfo">
-                <div className="productFooter">
-                    <div className="productInfo">
-                        <p className="productName">{props.name}</p>
-                        <p className="productPrice">${props.price}</p>   
-                    </div>
-                    <button onClick={removeFromCart} className="removeFromCartButton"><RemoveShoppingCartIcon/></button>
-                </div>
+            <div className="product-info">
+                    
+                <p className="productName">{props.name}</p>
+                <p className="productPrice">${props.price}</p>   
+                
+                <RemoveShoppingCartIcon onClick={removeFromCart} className="removeFromCartButton"/>
+                
                 <div className="quantity">
                     <label className="cartItemQuantityLabel">qty:</label>
                     <select className="cartItemQuantitySelect" defaultValue={quantity} onChange={handleQuantityChange} name="option">
