@@ -111,7 +111,7 @@ export const createComment = async (productId, token, commentText, createdBy) =>
     try {
 
         const commentResponse = await axios.post(
-            API_URL`/comment/create-comment`,
+            API_URL+`/comment/create-comment`,
             {
                 commentText,
                 createdBy,
