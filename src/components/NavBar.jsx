@@ -17,7 +17,6 @@ import ProductDetails from './ProductDetails';
 import StoreDetails from './StoreDetails';
 import AdminStore from './AdminStore';
 import CreateProductForm from './CreateProductForm';
-
 //icons
 
 
@@ -32,6 +31,11 @@ function NavBar(){
     //active button
     const [activeButton, setActiveButton] = useState('');
     // const[isStore , setIsStore] = useState(false);
+    // const [isHaburgerClicked, setIsHaburgerClicked] = useState(false);
+    // const [classAdded, setClassAdded] = useState('navBarButtons');
+
+    const [isOpen, setIsOpen] = useState(false);
+
 
     const location = window.location.pathname;
 
@@ -44,6 +48,24 @@ function NavBar(){
     const handleActiveButton = (button) => {
         setActiveButton(button);
     }
+
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const closeNavBar = () => {
+        setIsOpen(false);
+    }
+
+    const handleNavBarButtonClick = (button) => {
+        if(isOpen){
+            closeNavBar();
+        }
+        handleActiveButton(button)
+    }
+
+    
 
     useEffect(() => {
 
@@ -74,84 +96,90 @@ function NavBar(){
                 </div>
 
 
-            <div className='navBarButtons'>
-                <div className="navBarItem">
-                    
-                    <Link 
-                        to = "/"
-                        className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
-                        onClick = {() => handleActiveButton('')}
-                    >
-                        <p className='navBarButtonText'>Mall</p>
-                    </Link>
-                
-                </div>
-                <div className="navBarItem">
-                    
+                <div  className={`navBarButtons ${isOpen ? 'active' : ''}`}>
+                    <div className="navBarItem">
+                        
                         <Link 
-                            to = "/products" 
-                            className={`navBarButton ${activeButton === 'products' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('products')}
+                            to = "/"
+                            className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
+                            onClick={() => handleNavBarButtonClick('')}
                         >
-                            <p className='navBarButtonText'>Products</p>
+                            <p className='navBarButtonText'>Mall</p>
                         </Link>
                     
-                </div>
-
-                <div className="navBarItem">
-                
-                    {isStore &&
-                        <Link 
-                            to = "/mybusines"
-                            className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('mybusines')}
-                        >
-                            <p className='navBarButtonText'>My Business</p>
-                        </Link>
-                    }
-                </div>
-
-                <div className="navBarItem">
-                    
-                    <Link 
-                        to = "/cart" 
-                        className={`navBarButton ${activeButton === 'cart' ? 'active' : ''}`}
-                        onClick = {() => handleActiveButton('cart')}
-                    >
-                        <p className='navBarButtonText'>Cart</p>
-                    </Link>
-                    
-                </div>
-                <div className="navBarItem">
-                    
-                        {isLogged ?
-                
+                    </div>
+                    <div className="navBarItem">
+                        
                             <Link 
-                            to = "/account" 
-                            className={`navBarButton ${activeButton === 'account' ? 'active' : ''}`}
-                            onClick = {() => handleActiveButton('account')}
-                        >
-                            <p className='navBarButtonText'>Account</p>
-                            </Link> 
-                            : //if not logged in show login button
-                            <div className="navBarItem">
-                                <Link
-                                    to = "/login"
-                                    className={`navBarButton ${activeButton === 'login' ? 'active' : ''}`}
-                                    onClick = {() => handleActiveButton('login')}
+                                to = "/products" 
+                                className={`navBarButton ${activeButton === 'products' ? 'active' : ''}`}
+                                onClick={() => handleNavBarButtonClick('products')}
+                            >
+                                <p className='navBarButtonText'>Products</p>
+                            </Link>
+                        
+                    </div>
+
+                    {isStore &&
+                        <div className="navBarItem">
+                        
+                            
+                                <Link 
+                                    to = "/mybusines"
+                                    className={`navBarButton ${activeButton === 'mybusines' ? 'active' : ''}`}
+                                    onClick={() => handleNavBarButtonClick('mybusines')}
                                 >
-                                    <p className='navBarButtonText'>Login/SignUp</p>
+                                    <p className='navBarButtonText'>My Business</p>
                                 </Link>
-                            </div>
-                        }
-                
+                            
+                        </div>
+                    }
+
+                    <div className="navBarItem">
+                        
+                        <Link 
+                            to = "/cart" 
+                            className={`navBarButton ${activeButton === 'cart' ? 'active' : ''}`}
+                            onClick={() => handleNavBarButtonClick('cart')}
+                        >
+                            <p className='navBarButtonText'>Cart</p>
+                        </Link>
+                        
+                    </div>
+                    <div className="navBarItem">
+                        
+                            {isLogged ?
+                    
+                                <Link 
+                                to = "/account" 
+                                className={`navBarButton ${activeButton === 'account' ? 'active' : ''}`}
+                                onClick={() => handleNavBarButtonClick('account')}
+                            >
+                                <p className='navBarButtonText'>Account</p>
+                                </Link> 
+                                : //if not logged in show login button
+                                <div className="navBarItem">
+                                    <Link
+                                        to = "/login"
+                                        className={`navBarButton ${activeButton === 'login' ? 'active' : ''}`}
+                                        onClick={() => handleNavBarButtonClick('login')}
+                                    >
+                                        <p className='navBarButtonText'>Login/SignUp</p>
+                                    </Link>
+                                </div>
+                            }
+                    
+                    </div>
+
+                    <div className="navBarItem">
+                            <img className='searchIcon' src = "../../search.png" alt='search' />
+                    </div>
+            
                 </div>
 
-                <div className="navBarItem">
-                        <img className='searchIcon' src = "../../search.png" alt='search' />
+                <div className = "hamburger" onClick={toggleNavbar}>
+                        <img src='../../hamburger.png' alt="burgerImage"/>
                 </div>
-        
-            </div>
             
                 
             </div>
