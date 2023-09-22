@@ -30,9 +30,6 @@ function NavBar(){
 
     //active button
     const [activeButton, setActiveButton] = useState('');
-    // const[isStore , setIsStore] = useState(false);
-    // const [isHaburgerClicked, setIsHaburgerClicked] = useState(false);
-    // const [classAdded, setClassAdded] = useState('navBarButtons');
 
     const [isOpen, setIsOpen] = useState(false);
 
