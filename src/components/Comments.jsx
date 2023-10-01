@@ -63,7 +63,7 @@ function Comments(props) {
                 <button disabled>Add comment</button>
             }
             {
-                isAddingComment && <AddCommentForm setIsAddingComment={setIsAddingComment} commentAdded={commentAdded} productId={props.id}/>
+                isAddingComment && <AddCommentForm setIsAddingComment={setIsAddingComment} commentAdded={commentAdded} productId={props.id} userEmail = {userInfo.email}/>
             }
             {commentList.map(comment => (
                 <Comment key={comment.id} createdBy={comment.createdBy} commentText={comment.commentText} createdAt={comment.createdAt} lastUpdated={comment.lastUpdated}/>

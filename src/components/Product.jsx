@@ -24,7 +24,10 @@ function Product(props) {
     const [productImage, setProductImage] = useState(null);
     const [role, setRole] = useState('');
     const currentLocation = location.pathname.split("/")[1];
+    
+    const description = props.description;
 
+    const shortDescription = description.length > 100 ? description.substring(0, 100) + "..." : description;
 
     const defaultImage = "../../imagePlaceholder.jpg";
 
@@ -54,7 +57,7 @@ function Product(props) {
             setLogged(true);
         }
 
-    }, [userInfo, isLogged, props.id, props.imageIds]);
+    }, [props.id, props.imageIds, isLogged, userInfo]);
 
     async function addToCart(){
         if(logged){
@@ -125,7 +128,7 @@ function Product(props) {
 
                 <div className="product-info">
                     <p className="productName">{props.name}</p>
-                    <p className="productDescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ....</p>
+                <p className="productDescription">{shortDescription}</p>
                     <p className="productPrice">${props.price}</p>   
                     {currentLocation === "admin-store" && role === "STORE" ? 
                         (

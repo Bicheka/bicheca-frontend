@@ -50,6 +50,10 @@
     text-align: left;
     margin: 5px 10px; /* Add margin for spacing */
     font-size: 14px;
+    max-height: 80px;
+    height: 80px;
+
+    overflow:auto;
 
 }
 

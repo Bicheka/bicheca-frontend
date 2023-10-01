@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router';
 import styles from '../css/ProductImage.module.scss'
 import {changeImageRequest, removeImageRequest} from '../service/client';
+
+
+
 function ProductImage(props) {
 
     const [isHovered, setIsHovered] = useState(false);
@@ -8,8 +12,12 @@ function ProductImage(props) {
     const [selectedFile, setSelectedFile] = useState(null); //selected file from input[type=file
     const [isFormActive, setIsFormActive] = useState(false); //selected file from input[type=file
     const [image, setImage] = useState(null); //selected file from input[type=file
+    const updateImages = props.updateImages;
+    const handleImageDelete = props.handleImageDelete;
+    
+    const location = useLocation();
 
-    const {updateImages} = props;
+    const currentLocation = location.pathname.split("/")[1];
 
     // const token = useSelector(state => state.jwt.jwt);
     const token = localStorage.getItem('token');
@@ -23,8 +31,8 @@ function ProductImage(props) {
     }
 
     const handleImageChangeButton = () => {
-        setIsFormActive(true);
-        setIsChangingImage(true);
+        setIsFormActive(!isFormActive);
+        setIsChangingImage(!isChangingImage);
     }
 
     const handleImageUpdate = async (e) => {
@@ -33,9 +41,13 @@ function ProductImage(props) {
         formData.append("file", selectedFile);
 
         const updatedImage = await changeImageRequest(props.productId, props.id, token, formData);
+
         setImage(updatedImage);
+        
         setIsFormActive(false);
         setIsChangingImage(false);
+
+        updateImages(props.id, updatedImage);
     }
 
     const handleImageRemove = async () => {
@@ -45,7 +57,7 @@ function ProductImage(props) {
         setIsFormActive(false);
         setIsChangingImage(false);
         //update the images in the parent component
-        updateImages(props.id);
+        handleImageDelete()
     }
 
     const handleImageChange = (e) => {
@@ -58,13 +70,14 @@ function ProductImage(props) {
 
     return (
         <div className={styles.productImgDiv} onMouseOver={handleMouseEnter} onMouseOut={handleMouseLeave}>
-            {(props.isOwner && (isHovered || isFormActive)) ? 
+            {(props.isOwner && (isHovered || isFormActive) && currentLocation === "admin-product-details")  ? 
             
                 <div>
                     <button onClick={handleImageChangeButton}>Change Image</button>
                     {isChangingImage && 
                         
                         <form>
+                            <label>Select Image</label>
                             <input type="file" onChange={handleImageChange} />
                             <button onClick={handleImageUpdate}>update</button>
                         </form>                    

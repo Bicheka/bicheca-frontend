@@ -17,7 +17,7 @@ const AddCommentForm = (props) => {
 
     useEffect(() => {
         
-    }, [token]);
+    }, [userInfo]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
