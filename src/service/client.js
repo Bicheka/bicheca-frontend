@@ -137,7 +137,7 @@ export const createComment = async (productId, token, commentText, createdBy) =>
 
 export const fetchImages = async (productId) => {
     try{
-        const response = await axios.get(`http://localhost:8080/image/${productId}/get_product_images`);
+        const response = await axios.get(API_URL+`/image/${productId}/get_product_images`);
         return response.data;
     } catch (error) {
         console.log(error);
