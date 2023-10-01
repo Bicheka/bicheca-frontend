@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-// import './ImageCarousel.css'; // Import your CSS file
+import { useLocation } from 'react-router';
 import ProductImage from './ProductImage';
 import DoublyLinkedList from '../classes/DoublyLinkedList';
 import {fetchImages} from '../service/client';
@@ -15,6 +15,11 @@ const ImageCarousel = (props) => {
     const isOwner = props.isOwner;
     const [images, setImages] = useState([]);
     const [activeImageId, setActiveImageId] = useState(null);
+
+    const location = useLocation();
+
+    const currentLocation = location.pathname.split("/")[1];
+
 
     const handleNext = () => {
         if (imageList.getCurrentNext() === null) {
@@ -106,43 +111,45 @@ const ImageCarousel = (props) => {
 
     return (
         <div>
-            {currentImage ? (
-                <div className='carousel'>
+            <div>
+                {currentImage ? (
+                    <div className='carousel'>
+                        
+                        <div className="image-carousel">
+                        
+                            <ArrowBackIosNewIcon className="prev-button" onClick={handlePrev}/>
+                            <ProductImage
+                                key={currentImage.id}
+                                id={currentImage.id}
+                                productId={productId}
+                                isOwner={isOwner}
+                                image={currentImage.image}
+                                handleImageDelete={handleImageDelete}
+                                updateImages={updateImages}
+                            />
+                                
+                            <ArrowForwardIosIcon className="next-button" onClick={handleNext}/>
+                        
+                        </div>
+                        
                     
-                    <div className="image-carousel">
-                    
-                        <ArrowBackIosNewIcon className="prev-button" onClick={handlePrev}/>
-                        <ProductImage
-                            key={currentImage.id}
-                            id={currentImage.id}
-                            productId={productId}
-                            isOwner={isOwner}
-                            image={currentImage.image}
-                            handleImageDelete={handleImageDelete}
-                            updateImages={updateImages}
+                        <ImageCarouselPreview 
+                            handlePreviewClick = {handlePreviewClick} 
+                            images = {images} 
+                            deletedImageId={currentImage ? currentImage.id : null}
+                            activeImageId={activeImageId}
+                        
                         />
-                            
-                        <ArrowForwardIosIcon className="next-button" onClick={handleNext}/>
+
+                    
                     
                     </div>
-                    
-                
-                    <ImageCarouselPreview 
-                        handlePreviewClick = {handlePreviewClick} 
-                        images = {images} 
-                        deletedImageId={currentImage ? currentImage.id : null}
-                        activeImageId={activeImageId}
-                    
-                    />
-
-                
-                
-                </div>
-            ):
-                <p>No images :(</p>
-            }
+                ):
+                    <p>No images :</p>
+                }
+            </div>
             {
-                isOwner && (
+                (isOwner && currentLocation === 'admin-product-details') && (
                     <AddProductImage productId = {productId} addImage={addImage}/>
                 )
             }
