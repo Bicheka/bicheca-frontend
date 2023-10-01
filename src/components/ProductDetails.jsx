@@ -4,7 +4,7 @@ import { useLocation } from "react-router";
 import GoBackButton from "./GoBackButton";
 import Comments from "./Comments";
 import style from "../css/ProductDetails.module.scss"
-import ProductImage from "./ProductImage";
+import ImageCarousel from "./ImageCarousel";
 import { useSelector } from "react-redux";
 import FormatedDate from "./FormatedDate";
 import { API_URL } from "./global/GlobalConsts"
@@ -15,7 +15,6 @@ function ProductDetails(props) {
     console.log(location);
     const id = location.pathname.split("/")[2];
     const [product, setProduct] = useState({});
-    const [images, setImages] = useState([]);
     const [isOwner, setIsOwner] = useState(false);
     const user = useSelector(state => state.userInfo.userInfo);
 
@@ -33,18 +32,6 @@ function ProductDetails(props) {
             }
 
         }
-        
-        const fetchImages = async () => {
-            
-            try{
-                const response = await axios.get(`http://localhost:8080/image/${id}/get_product_images`);
-                setImages(response.data);
-                console.log(response);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchImages();
 
         fetchProduct();
 
@@ -59,35 +46,19 @@ function ProductDetails(props) {
 
     }, [user, product, location]);
 
-    //method to update images whenerver an image is deleted based in its index
-    const updateImages = (id) => {
-        const newImages = images.filter((image) => image.id !== id);
-        setImages(newImages);
-    }
-
+    
     //re render images whenever images state changes
-    useEffect(() => {
-        console.log(images);
-    }, [images]);
 
     return (
         <div className="productDetails">
             <h1>Product Details</h1>
             <h2>{product.name}</h2>
             
-            <div className={style.productImages}>
+            <ImageCarousel 
+                isOwner={isOwner}
+                productId={id}
+            />
 
-                {images.map((image) => (
-                    <ProductImage
-                        key={image.id}
-                        id={image.id}
-                        productId={id}
-                        isOwner={isOwner}
-                        image={image.image}
-                        updateImages={updateImages}
-                    />
-                ))}
-            </div>
             <p>${product.price}</p>    
             <p>Created at: </p>
             <FormatedDate date={product.dateAdded}/>

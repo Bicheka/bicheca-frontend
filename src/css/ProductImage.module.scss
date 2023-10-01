@@ -1,6 +1,6 @@
 .productImgDiv{
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
     color: rgb(23, 23, 28);
     background-color: #e6e6e6;
     text-align: center;
@@ -15,4 +15,11 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 800px) {
+    .productImgDiv{
+        width: 200px;
+        height: 200px;
+    }
 }

@@ -8,12 +8,12 @@ function Comment(props) {
 
     return (
         <div className="comment">
-            <p>Created by: {props.createdBy}</p>
-            <p>"{props.commentText}"</p>
-            <p>created at: {createdAt.toLocaleString()}</p>
+            <p className="commentField">Created by: {props.createdBy}</p>
+            <p className="commentField">"{props.commentText}"</p>
+            <p className="commentField">created at: {createdAt.toLocaleString()}</p>
             {
                 createdAt.getTime() !== lastUpdated.getTime() &&
-                <p>last updated: {lastUpdated.toLocaleString()}</p>
+                <p className="commentField">last updated: {lastUpdated.toLocaleString()}</p>
             }
         </div>
     );

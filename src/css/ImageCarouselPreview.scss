@@ -1,0 +1,32 @@
+.image-carousel-preview{
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto 20px auto;
+}
+
+.image-preview{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2px;
+    margin: 10px;
+}
+
+.active-image-preview{
+    border: 2px solid black; /* Add a solid border around the active image */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add a subtle box shadow */
+    transform: scale(1.1); /* Apply a slight zoom effect to make it stand out */
+    transition: all 0.3s ease; /* Add a smooth transition effect */
+}
+
+.image-preview:hover{
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .image-preview{
+       margin: 5px;
+    }
+}
+    
