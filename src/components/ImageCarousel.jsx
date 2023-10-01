@@ -106,38 +106,41 @@ const ImageCarousel = (props) => {
 
     return (
         <div>
-            <div className='carousel'>
-                {currentImage ? (
-                <div className="image-carousel">
-                
-                <ArrowBackIosNewIcon className="prev-button" onClick={handlePrev}/>
-                <ProductImage
-                    key={currentImage.id}
-                    id={currentImage.id}
-                    productId={productId}
-                    isOwner={isOwner}
-                    image={currentImage.image}
-                    handleImageDelete={handleImageDelete}
-                    updateImages={updateImages}
-                />
+            {currentImage ? (
+                <div className='carousel'>
                     
-                <ArrowForwardIosIcon className="next-button" onClick={handleNext}/>
+                    <div className="image-carousel">
+                    
+                        <ArrowBackIosNewIcon className="prev-button" onClick={handlePrev}/>
+                        <ProductImage
+                            key={currentImage.id}
+                            id={currentImage.id}
+                            productId={productId}
+                            isOwner={isOwner}
+                            image={currentImage.image}
+                            handleImageDelete={handleImageDelete}
+                            updateImages={updateImages}
+                        />
+                            
+                        <ArrowForwardIosIcon className="next-button" onClick={handleNext}/>
+                    
+                    </div>
+                    
+                
+                    <ImageCarouselPreview 
+                        handlePreviewClick = {handlePreviewClick} 
+                        images = {images} 
+                        deletedImageId={currentImage ? currentImage.id : null}
+                        activeImageId={activeImageId}
+                    
+                    />
+
+                
                 
                 </div>
-                ):
-                <h5>No images</h5>
-                }
-            
-                <ImageCarouselPreview 
-                    handlePreviewClick = {handlePreviewClick} 
-                    images = {images} 
-                    deletedImageId={currentImage ? currentImage.id : null}
-                    activeImageId={activeImageId}/>
-
-                
-                
-            </div>
-
+            ):
+                <p>No images :(</p>
+            }
             {
                 isOwner && (
                     <AddProductImage productId = {productId} addImage={addImage}/>
