@@ -57,13 +57,19 @@ function Login(props) {
       const user = await fetchUser(token);
       console.log(user);
 
+      console.log("user: ")
+      console.log(user)
+
+
       // setUserName(user.data.firstName);
       dispatch(setIsLogged(true));
       dispatch(setUserInfo(user.data));
       
       console.log(user.data);
-      
-      navigate('/'); //redirect to home page after login
+
+
+      navigate('/');
+
 
     } catch (erroR) {
       setError(erroR);
