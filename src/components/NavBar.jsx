@@ -5,8 +5,8 @@ import { BrowserRouter, Link , Routes, Route} from "react-router-dom";
 import '../css/NavBar.scss'
 
 //components
-// import Account from './Account';
-import Mall from './Mall';
+import MainPage from './MainPage';
+import Stores from './Stores';
 import Products from './Products';
 import Account from './Account';
 import Cart from './Cart';
@@ -17,6 +17,7 @@ import ProductDetails from './ProductDetails';
 import StoreDetails from './StoreDetails';
 import AdminStore from './AdminStore';
 import CreateProductForm from './CreateProductForm';
+
 //icons
 
 
@@ -24,6 +25,7 @@ import CreateProductForm from './CreateProductForm';
 import useCheckLogin from './hook/useCheckLogin';
 import { useSelector } from 'react-redux';
 import AdminProductDetails from './AdminProductDetails';
+
 
 
 function NavBar(){
@@ -87,7 +89,9 @@ function NavBar(){
             <div className="navBar">
 
                 <div className='navBarLogo'>
-                    <Link to = "/">
+                    <Link to = "/"
+                        onClick={() => handleNavBarButtonClick('')}
+                    >
                         <h2 className='navBarLogoText'>Bicheka</h2>
                     </Link>
                 </div>
@@ -97,11 +101,11 @@ function NavBar(){
                     <div className="navBarItem">
                         
                         <Link 
-                            to = "/"
-                            className={`navBarButton ${activeButton === '' ? 'active' : ''}`}
+                            to = "/stores"
+                            className={`navBarButton ${activeButton === 'stores' ? 'active' : ''}`}
                             onClick={() => handleNavBarButtonClick('')}
                         >
-                            <p className='navBarButtonText'>Mall</p>
+                            <p className='navBarButtonText'>Stores</p>
                         </Link>
                     
                     </div>
@@ -181,7 +185,8 @@ function NavBar(){
                 
             </div>
             <Routes>
-                <Route exact path='/' element = {<Mall/>}/>
+                <Route exact path='/' element = {<MainPage/>}/>
+                <Route exact path='/stores' element = {<Stores/>}/>
                 <Route exact path='/products' element={<Products/>}/>
                 <Route exact path='/cart' element={<Cart/>}/>
                 <Route exact path='/account' element={<Account/>}/>

@@ -5,7 +5,7 @@ import "../css/Mall.css";
 import { API_URL } from "./global/GlobalConsts";
 
 
-function Mall() {
+function Stores() {
 
     const [stores, setStores] = useState([]);
  
@@ -30,7 +30,7 @@ function Mall() {
     return (
         <div>
             <div>
-                <h1>Mall</h1>
+                <h1>Stores</h1>
                 <div className="mall">
                     {stores.map(store => (
                         <Store key={store.id} id={store.id} name={store.storeName}/>
@@ -41,4 +41,4 @@ function Mall() {
     );
 }
 
-export default Mall;
+export default Stores;
