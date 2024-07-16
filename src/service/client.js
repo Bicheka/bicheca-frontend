@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { API_URL } from "../components/global/GlobalConsts"
+import axios from "axios";
+import { API_URL } from "../components/global/GlobalConsts";
 
 export const fetchUser = async (token) => {
 
