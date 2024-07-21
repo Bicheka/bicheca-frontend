@@ -1,1 +1,1 @@
-<h1>Bicheka's Frontend</h1>
+<h1>WEBMALL's Frontend</h1>
