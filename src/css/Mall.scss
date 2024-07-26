@@ -1,0 +1,22 @@
+.mall {
+    width: 60%;
+    /* Adjust the maximum width as needed */
+    margin: 100px auto;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: auto;
+    /* Change to 'auto' for variable-height rows */
+    grid-auto-rows: auto;
+    grid-auto-rows: min-content;
+    grid-auto-rows: minmax(30px, auto);
+    grid-gap: 3rem;
+    /* Adjust the grid gap as needed */
+}
+
+@media screen and (max-width: 800px) {
+    .mall {
+        width: 95%;
+        display: block;
+    }
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Store from "./Store";
-import "../css/Mall.css";
+import "../css/Mall.scss";
 import { API_URL } from "./global/GlobalConsts";
 
 

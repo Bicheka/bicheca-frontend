@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import "../css/Store.css";
+import "../css/Store.scss";
 // import { useSelector } from "react-redux";
 import { useSelector } from "react-redux";
 
