@@ -99,10 +99,11 @@ function Product(props) {
 
     return (
             <div className="product">
+                <Link to={`/admin-product-details/${props.id}`}>
                 {
                     currentLocation === "admin-store" && role === "STORE" ?
                     (
-                        <Link to={`/admin-product-details/${props.id}`}>
+                        
                             <div className="productImg">
                                 <img
                                     className="product-img"
@@ -110,7 +111,7 @@ function Product(props) {
                                     alt="product"
                                 />                       
                             </div>
-                        </Link>
+                        
                     )
                     :
                     (
@@ -142,6 +143,7 @@ function Product(props) {
                         )
                     }
                 </div>
+                </Link>
             </div>
        
     );
