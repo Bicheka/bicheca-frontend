@@ -77,7 +77,7 @@ function Account(){
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        // setLogged(false);
+        setLogged(false);
         navigate('/login')
         window.location.reload();
     }

@@ -84,7 +84,7 @@ function Login(props) {
       <h1>Login</h1>
       {/* <h1>{isLogged ? "Hello "+userName : ""}</h1> */}
       <form onSubmit={handleLogin}>
-        {error && <div>{error}</div>}
+        <div>{error && <div className='error'><p>Error when trying to connect to server</p></div>}</div>
         <div className='field'>
           <label>Email</label>
           <input type="email" name="email" value={email} onChange={e => setemail(e.target.value)} />
