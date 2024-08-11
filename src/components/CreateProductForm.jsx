@@ -103,7 +103,9 @@ function CreateProductForm() {
                 </select>
 
                 <label>Product Image</label>
-                <input type="file" className="form-control" onChange={handleImageChange}/> 
+                <div>
+                    <input type="file" className="form-control" onChange={handleImageChange}/> 
+                </div>
 
                 <button className="btn btn-primary" onClick={handleCreateProduct}>Create Product</button>
 
