@@ -20,21 +20,6 @@ export const fetchUser = async (token) => {
 
 }
 
-export const getUserStores = async (token) => {
-    try {
-        const response = await axios.get(API_URL + '/store/get_user_stores', 
-                    {
-                        headers: {
-                            Authorization: token,
-                        }
-                    });
-        console.log("response", response);
-        return response.data;
-      } catch (error) {
-        console.log("error", error);
-    }
-}
-
 export const changeImageRequest = async (productId, imageId, token, formData) => {
 
 

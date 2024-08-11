@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Store from "./Store";
 import '../css/MyBusiness.css';
-import {getUserStores} from '../service/client';
 import { useSelector } from "react-redux";
 
 function MyBusines() {
 
-  // const jwt = useSelector(state => state.jwt.jwt);
-  const jwt = useSelector(state => state.jwt.jwt);
+  const user = useSelector(state => state.userInfo.userInfo);
   const [stores, setStores] = useState([]);
-
   useEffect(() => {
-    
-    const fetchUserStores = async () => {
-      setStores(await getUserStores(jwt));
-    };
-    fetchUserStores();
-  }, [jwt]);
-
+    if (user && user.stores) {
+      setStores(user.stores);
+    }
+  }, [user])
   return (
     <div>
       <div>
