@@ -92,13 +92,13 @@ function CartItem(props) {
     return (
         <div className="product">
             <Link to={`/product-details/${props.id}`}>
-            <div className="productImg">
-                        <img
-                            className="product-img"
-                            src={itemImage ? `data:image/jpeg;base64,${itemImage}` : defaultImage}
-                            alt="itemImg"
-                        />                       
-                    </div>
+            <div className="product-img">
+                <img
+                    className="product-img"
+                    src={itemImage ? `data:image/jpeg;base64,${itemImage}` : defaultImage}
+                    alt="itemImg"
+                />                       
+            </div>
             </Link>
             <div className="product-info">
                     

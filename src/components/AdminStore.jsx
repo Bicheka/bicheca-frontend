@@ -19,9 +19,11 @@ function AdminStore() {
         const fetchProducts = async () => {
             try{
                 const response = await axios.get(API_URL+`/store/get_store/${storeId}`);
-                setProducts(response.data.products)
-                setStoreName(response.data.storeName);
-                console.log(response);
+                if (response){
+                    console.log(response)
+                    setProducts(response.data.products)
+                    setStoreName(response.data.storeName);
+                }
             } catch (error) {
                 console.log(error);
             }

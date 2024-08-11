@@ -100,36 +100,37 @@ function Product(props) {
     return (
             <div className="product">
                 <Link to={`/admin-product-details/${props.id}`}>
-                {
-                    currentLocation === "admin-store" && role === "STORE" ?
-                    (
-                        
-                            <div className="productImg">
-                                <img
-                                    className="product-img"
-                                    src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
-                                    alt="product"
-                                />                       
-                            </div>
-                        
-                    )
-                    :
-                    (
-                        <Link to={`/product-details/${props.id}`}>
-                            <div className="productImg">
-                                <img
-                                    className="product-img"
-                                    src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
-                                    alt="product"
-                                />                       
-                            </div>
-                        </Link>
-                    )
-                }
-
+                <div className="product-img">
+                    {
+                        currentLocation === "admin-store" && role === "STORE" ?
+                        (
+                            
+                                <div>
+                                    <img
+                                        className="product-img"
+                                        src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
+                                        alt="product"
+                                    />                       
+                                </div>
+                            
+                        )
+                        :
+                        (
+                            <Link to={`/product-details/${props.id}`}>
+                                <div>
+                                    <img
+                                        className="product-img"
+                                        src={productImage ? `data:image/jpeg;base64,${productImage}` : defaultImage}
+                                        alt="product"
+                                    />                       
+                                </div>
+                            </Link>
+                        )
+                    }
+                </div>
                 <div className="product-info">
                     <p className="productName">{props.name}</p>
-                <p className="productDescription">{shortDescription}</p>
+                    <p className="productDescription">{shortDescription}</p>
                     <p className="productPrice">${props.price}</p>   
                     {currentLocation === "admin-store" && role === "STORE" ? 
                         (
