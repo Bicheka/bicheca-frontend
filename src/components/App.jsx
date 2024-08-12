@@ -17,7 +17,7 @@ function App(){
       <Provider store={store}>
 
         <NavBar />
-        
+
       </Provider>
     </div>
   )

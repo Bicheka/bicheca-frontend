@@ -25,6 +25,7 @@ import CreateProductForm from './CreateProductForm';
 import useCheckLogin from './hook/useCheckLogin';
 import { useSelector } from 'react-redux';
 import AdminProductDetails from './AdminProductDetails';
+import SearchBar from './SearchBar';
 
 
 
@@ -172,9 +173,7 @@ function NavBar(){
                     
                     </div>
 
-                    <div className="navBarItem">
-                            <img className='searchIcon' src = "../../search.png" alt='search' />
-                    </div>
+                    
             
                 </div>
 
@@ -184,6 +183,7 @@ function NavBar(){
             
                 
             </div>
+            <SearchBar/>
             <Routes>
                 <Route exact path='/' element = {<MainPage/>}/>
                 <Route exact path='/stores' element = {<Stores/>}/>
